@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Size;
@@ -13,9 +14,8 @@ class ProductController extends Controller
 {
     public function index()
     {
-        // $data = Products::all();
-        $products = DB::table('products')->select(['id','name','price','description','status','image','cate_id','size_id'])->paginate(5);
-        return \view('admin.product.index', \compact('products'));
+        $product = Product::select('id','name','price','image','description','status','cate_id','size_id')->paginate(5);
+        return \view('admin.product.index', \compact('product'));
     }
     public function create()
     {
@@ -31,7 +31,9 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         // $data = $request->all();
+        // $validateData = $request->validate();
         $product = new Product;
+        $product->fill($request->all());
         $product->name = $request->name;
         $product->price = $request->price;
         $product->description = $request->description;
@@ -39,10 +41,10 @@ class ProductController extends Controller
         $product->cate_id = $request->cate_id;
         $product->status = $request->status == true ? '1': '0';
         // $product->image = $request->image;
-        if($request->file('image')){
+        if($request->hasFile('image')){
             $file= $request->file('image');
             $filename= date('YmdHi').$file->getClientOriginalName();
-            $file-> move(public_path('Image'), $filename);
+            $file-> storeAs('images/products', $filename);
             $product->image= $filename;
         }
         // Products::create($data);

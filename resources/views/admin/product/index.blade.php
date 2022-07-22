@@ -1,5 +1,5 @@
 @extends('admin.layout.master')
-@section('content-title')
+@section('title')
     Danh sách sản phẩm
 @endsection
 @section('content')
@@ -24,9 +24,9 @@
             </tr>
         </thead>
         <tbody>
-            @if ($products)
+            @if ($product)
 
-            @foreach ($products as $item)
+            @foreach ($product as $item)
                 <tr>
                     <td>
                         {{ $item->id }}
@@ -35,12 +35,12 @@
                         {{ $item->name }}
                     </td>
                     <td>{{ $item->price }}</td>
-                    <td>{{ $item->description }}</td>
-                    <td>{{ $item->cate_id}}</td>
+                    <td id="summernote">{!! $item->description !!}</td>
+                    <td>{{ $item->category->name}}</td>
                     <td>{{ $item->size_id }}</td>
 
                     <td>{{ $item->status == 1 ? 'hiện' : 'ẩn' }}</td>
-                    <td><img id="product-img" src="{{ url('Image/'.$item->image) }}" width="200px" alt=""></td>
+                    <td><img id="product-img" src="{{ url('images/products/'.$item->image) }}" width="200px" alt=""></td>
                     <td>
                         <form action="{{route('products.destroy', $item->id)}}" method="Post">
                             <a class="btn btn-primary" href="{{ route('products.edit', $item->id) }}">Sửa</a>
@@ -58,10 +58,11 @@
                 </tr>
             @endforeach
             @endif
+
         </tbody>
 
     </table>
-    {{ $products->links() }}
+    {{ $product->links() }}
     <script type="text/javascript">
         $('#name').on('keyup',function(){
             $value = $(this).val();
@@ -102,4 +103,5 @@
         //     })
         // })
     </script>
+
 @endsection

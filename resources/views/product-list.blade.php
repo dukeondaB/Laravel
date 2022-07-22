@@ -40,49 +40,6 @@
                             </ul>
                         </div>
                     </aside>
-
-                    {{-- <aside class="left_widgets p_filter_widgets">
-                        <div class="l_w_title">
-                            <h3>Product filters</h3>
-                        </div>
-                        <div class="widgets_inner">
-                            <ul class="list">
-                                <li>
-                                    <a href="#">Apple</a>
-                                </li>
-                                <li>
-                                    <a href="#">Asus</a>
-                                </li>
-                                <li class="active">
-                                    <a href="#">Gionee</a>
-                                </li>
-                                <li>
-                                    <a href="#">Micromax</a>
-                                </li>
-                                <li>
-                                    <a href="#">Samsung</a>
-                                </li>
-                            </ul>
-                            <ul class="list">
-                                <li>
-                                    <a href="#">Apple</a>
-                                </li>
-                                <li>
-                                    <a href="#">Asus</a>
-                                </li>
-                                <li class="active">
-                                    <a href="#">Gionee</a>
-                                </li>
-                                <li>
-                                    <a href="#">Micromax</a>
-                                </li>
-                                <li>
-                                    <a href="#">Samsung</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </aside> --}}
-
                     <aside class="left_widgets p_filter_widgets">
                         <div class="l_w_title">
                             <h3>Kích thước</h3>
@@ -164,8 +121,23 @@
                         </div>
                     </div>
                 </div>
-
+{{-- sản phẩm ở đây --}}
                 <div class="row align-items-center latest_product_inner">
+                    @foreach ($product as $item)
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="single_product_item">
+
+                            <img src="{{url('images/products/'.$item->image)}}" width="270px" height="270px" alt="">
+                            <a href="{{route('product', $item->id)}}">
+                            <div class="single_product_text">
+                                <h4>{{$item->name}}</h4>
+                                <h3>{{number_format($item->price)}} <span class="text-danger">VNĐ</span></h3>
+                                <a href="" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                            </div>
+                        </a>
+                        </div>
+                    </div>
+                    @endforeach
                     <div class="col-lg-4 col-sm-6">
                         <div class="single_product_item">
 

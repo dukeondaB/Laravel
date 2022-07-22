@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="{{ asset('client/css/price_rangs.css') }}">
     <!-- style CSS -->
     <link rel="stylesheet" href="{{ asset('client/css/style.css') }}">
+    <link rel="stylesheet" href="{{asset('summernote/summernote.min.css')}}">
     {{-- =============================== --}}
 </head>
 
@@ -328,6 +329,7 @@
 <script src="{{ asset('client/js/theme.js') }}"></script>
 <script src="{{ asset('client/js/custom.js') }}"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{asset('summernote/summernote.min.js')}}"></script>
 {{-- ========================= --}}
 
 @yield('script')

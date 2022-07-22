@@ -17,8 +17,7 @@
   <link rel="stylesheet" href="{{asset('admin/css/style.css')}}">
   <!-- endinject -->
   <link rel="shortcut icon" href="{{asset('admin/images/favicon.png')}}" />
-  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="{{asset('summernote/summernote.min.css')}}">
 </head>
 <body>
 
@@ -26,63 +25,60 @@
 
     <div class="container-fluid page-body-wrapper">
 
-      @include('admin.layout.sidebar')
-      <div class="main-panel">
-        <div class="content-wrapper">
-            <div class="card">
-                <div class="card-header">
-                <h1>@yield('content-title')</h1>
+        @include('admin.layout.sidebar')
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="card">
+                    <div class="card-header">
+                        <h1>@yield('title')</h1>
 
-            </div>
-            <div class="card-body">
+                    </div>
+                    <div class="card-body">
 
-                @yield('content')
-            </div>
+                        @yield('content')
+                    </div>
           </div>
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
         <footer class="footer">
-        <div class="d-sm-flex justify-content-center justify-content-sm-between">
-          <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <a href="https://www.bootstrapdash.com/" target="_blank">bootstrapdash.com </a>2021</span>
-          <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Only the best <a href="https://www.bootstrapdash.com/" target="_blank"> Bootstrap dashboard  </a> templates</span>
-        </div>
+            <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <a href="https://www.bootstrapdash.com/" target="_blank">bootstrapdash.com </a>2021</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Only the best <a href="https://www.bootstrapdash.com/" target="_blank"> Bootstrap dashboard  </a> templates</span>
+            </div>
         </footer>
         <!-- partial -->
-      </div>
-      <!-- main-panel ends -->
     </div>
-    <!-- page-body-wrapper ends -->
-  </div>
-  <!-- container-scroller -->
+    <!-- main-panel ends -->
+</div>
+<!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->
 
-  <!-- plugins:js -->
-  <script src="{{asset('admin/vendors/base/vendor.bundle.base.js')}}"></script>
-  <!-- endinject -->
-  <!-- Plugin js for this page-->
-  <script src="{{asset('admin/vendors/datatables.net/jquery.dataTables.js')}}"></script>
-  <script src="{{asset('admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js')}}"></script>
-  <!-- End plugin js for this page-->
-  <!-- inject:js -->
-  <script src="{{asset('admin/js/off-canvas.js')}}"></script>
-  <script src="{{asset('admin/js/hoverable-collapse.js')}}"></script>
-  <script src="{{asset('admin/js/template.js')}}"></script>
-  <!-- endinject -->
-  <!-- Custom js for this page-->
-  <script src="{{asset('admin/js/dashboard.js')}}"></script>
-  <script src="{{asset('admin/js/data-table.js')}}"></script>
-  <script src="{{asset('admin/js/jquery.dataTables.js')}}"></script>
-  <script src="{{asset('admin/js/dataTables.bootstrap4.js')}}"></script>
-  <!-- End custom js for this page-->
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="js/jquery.cookie.js" type="text/javascript"></script>
-  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-  <script>
-    $(document).ready(function() {
-        $('#summernote').summernote();
-    });
-  </script>
-  @yield('script')
+<!-- plugins:js -->
+<script src="{{asset('admin/vendors/base/vendor.bundle.base.js')}}"></script>
+<!-- endinject -->
+<!-- Plugin js for this page-->
+<script src="{{asset('admin/vendors/datatables.net/jquery.dataTables.js')}}"></script>
+<script src="{{asset('admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js')}}"></script>
+<!-- End plugin js for this page-->
+<!-- inject:js -->
+<script src="{{asset('admin/js/off-canvas.js')}}"></script>
+<script src="{{asset('admin/js/hoverable-collapse.js')}}"></script>
+<script src="{{asset('admin/js/template.js')}}"></script>
+<!-- endinject -->
+<!-- Custom js for this page-->
+<script src="{{asset('admin/js/dashboard.js')}}"></script>
+<script src="{{asset('admin/js/data-table.js')}}"></script>
+<script src="{{asset('admin/js/jquery.dataTables.js')}}"></script>
+<script src="{{asset('admin/js/dataTables.bootstrap4.js')}}"></script>
+<!-- End custom js for this page-->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{asset('admin/js/jquery.cookie.js')}}" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{{asset('summernote/summernote.min.js')}}"></script>
+
+@yield('script')
 </body>
 
 </html>

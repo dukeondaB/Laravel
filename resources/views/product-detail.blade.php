@@ -7,8 +7,8 @@
         <div class="col-lg-7 col-xl-7">
           <div class="product_slider_img">
             <div id="vertical">
-              <div data-thumb="{{asset('client/img/product/single-product/product_1.png')}}">
-                <img src="{{asset('client/img/product/single-product/product_1.png')}}" />
+              <div data-thumb="{{url('images/products/'.$product->image)}}">
+                <img src="{{url('images/products/'.$product->image)}}"/>
               </div>
               <div data-thumb="{{asset('client/img/product/single-product/product_1.png')}}">
                 <img src="{{asset('client/img/product/single-product/product_1.png')}}" />
@@ -16,39 +16,40 @@
               <div data-thumb="{{asset('client/img/product/single-product/product_1.png')}}">
                 <img src="{{asset('client/img/product/single-product/product_1.png')}}" />
               </div>
-              <div data-thumb="{{asset('client/img/product/single-product/product_1.png')}}">
+              {{-- <div data-thumb="{{asset('client/img/product/single-product/product_1.png')}}">
                 <img src="{{asset('client/img/product/single-product/product_1.png')}}" />
-              </div>
+              </div> --}}
             </div>
           </div>
         </div>
         <div class="col-lg-5 col-xl-4">
           <div class="s_product_text">
             <h5>previous <span>|</span> next</h5>
-            <h3>Faded SkyBlu Denim Jeans</h3>
-            <h2>$149.99</h2>
+            <h3>{{$product->name}}</h3>
+            <h2>{{number_format($product->price)}} VNĐ</h2>
             <ul class="list">
               <li>
                 <a class="active" href="#">
-                  <span>Category</span> : Household</a>
+                  <span>Danh mục</span> : {{$product->category->name}}</a>
               </li>
               <li>
-                <a href="#"> <span>Availibility</span> : In Stock</a>
+                <a href="#"> <span>Trạng thái</span> : <span class="text-success"> Còn hàng</span></a>
               </li>
             </ul>
+            <div style="height: 50px">
             <p>
-              First replenish living. Creepeth image image. Creeping can't, won't called.
-              Two fruitful let days signs sea together all land fly subdue
-            </p>
+             {!!$product->description!!}
+            </p></div>
+            <div>
             <div class="card_area d-flex justify-content-between align-items-center">
               <div class="product_count">
                 <span class="inumber-decrement"> <i class="ti-minus"></i></span>
                 <input class="input-number" type="text" value="1" min="0" max="10">
                 <span class="number-increment"> <i class="ti-plus"></i></span>
               </div>
-              <a href="#" class="btn_3">add to cart</a>
+              <a href="#" class="btn_3">Thêm vào giỏ</a>
               <a href="#" class="like_us"> <i class="ti-heart"></i> </a>
-            </div>
+            </div></div>
           </div>
         </div>
       </div>
@@ -525,3 +526,18 @@
   </section>
 
 @endsection
+<script>
+    $(document).ready(function() {
+        $('#summernote').summernote({
+            placeholder: 'Nhập gì đó điiiiii',
+            tabsize: 2,
+      height: 200,
+      minHeight: 100,
+      maxHeight: 300,
+      focus: true,
+      codemirror: {
+        theme: 'monokai'
+      }
+        });
+    });
+  </script>

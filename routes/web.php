@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductDetail;
 use App\Http\Controllers\ProductListController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,9 +36,7 @@ Route::prefix('/')->group(function(){
     Route::get('product',[ProductListController::class, 'index'])->name('product-list');
     Route::get('contact',[ContactController::class, 'index'])->name('contact-form');
     Route::post('contact',[ContactController::class, 'save'])->name('contact.store');
-    Route::get('product-detail', function(){
-        return view('product-detail');
-    });
+    Route::get('product-detail/{product}', [ProductDetail::class, 'index'])->name('product');
     Route::get('cart',[CartController::class,'index'])->name('cart');
 });
 Auth::routes();
