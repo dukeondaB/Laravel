@@ -34,10 +34,10 @@
                     <td>
                         {{ $item->name }}
                     </td>
-                    <td>{{ $item->price }}</td>
+                    <td>{{ number_format($item->price) }}</td>
                     <td id="summernote">{!! $item->description !!}</td>
                     <td>{{ $item->category->name}}</td>
-                    <td>{{ $item->size_id }}</td>
+                    <td>{{ $item->size->size_name }}</td>
 
                     <td>{{ $item->status == 1 ? 'hiện' : 'ẩn' }}</td>
                     <td><img id="product-img" src="{{ url('images/products/'.$item->image) }}" width="200px" alt=""></td>

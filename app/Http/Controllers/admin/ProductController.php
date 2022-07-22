@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -58,6 +59,40 @@ class ProductController extends Controller
         return \redirect()->route('products.index');
         //  có thể sử dụng model::destroy($student);
 
+    }
+    public function edit(Product $product)
+    {
+        $size = Size::select('id','size_name')->get();
+        $category = Category::select('id','name')->get();
+        return \view('admin.product.edit',[
+            'product' => $product,
+            'size' => $size,
+            'category' => $category
+        ]);
+    }
+    public function update(ProductRequest $request, $product)
+    {
+
+        $product = Product::find($product);
+        $product->fill($request->all());
+        $product->status = $request->status == true ? '1': '0';
+        // $product->image = $request->image;
+        if($request->hasFile('image')){
+            $path = 'images/products/'. $product->image;
+            if(File::exists($path)){
+                File::delete($path);
+            }
+            $file= $request->file('image');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> storeAs('images/products', $filename);
+            $product->image= $filename;
+        }
+        $product->update();
+        // $data = $request->all();
+
+        // $student->update($data);
+        // nếu ở đây dùng update($data) thì vẫn cần @method(PUT) ở form
+        return \redirect()->route('products.index');
     }
     public function search(Request $request)
     {
