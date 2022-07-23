@@ -24,7 +24,6 @@
         </div>
         <div class="col-lg-5 col-xl-4">
           <div class="s_product_text">
-            <h5>previous <span>|</span> next</h5>
             <h3>{{$product->name}}</h3>
             <h2>{{number_format($product->price)}} VNĐ</h2>
             <ul class="list">
@@ -33,12 +32,15 @@
                   <span>Danh mục</span> : {{$product->category->name}}</a>
               </li>
               <li>
+                <a href="#"> <span>Kích cỡ</span> :  {{$product->size->size_name}}</a>
+              </li>
+              <li>
                 <a href="#"> <span>Trạng thái</span> : <span class="text-success"> Còn hàng</span></a>
               </li>
             </ul>
             <div style="height: 50px">
             <p>
-             {!!$product->description!!}
+             {{-- {!!$product->description!!} --}}
             </p></div>
             <div>
             <div class="card_area d-flex justify-content-between align-items-center">
@@ -47,8 +49,7 @@
                 <input class="input-number" type="text" value="1" min="0" max="10">
                 <span class="number-increment"> <i class="ti-plus"></i></span>
               </div>
-              <a href="#" class="btn_3">Thêm vào giỏ</a>
-              <a href="#" class="like_us"> <i class="ti-heart"></i> </a>
+              <a href="{{ route('add.to.cart', $product->id) }}" class="btn_3">Thêm vào giỏ</a>
             </div></div>
           </div>
         </div>
@@ -477,20 +478,23 @@
       <div class="row justify-content-center">
         <div class="col-lg-12">
           <div class="section_tittle text-center">
-            <h2>Best Sellers <span>shop</span></h2>
+            <h2>Sản phẩm liên quan</h2>
           </div>
         </div>
       </div>
       <div class="row align-items-center justify-content-between">
         <div class="col-lg-12">
           <div class="best_product_slider owl-carousel">
+            @foreach ($related_products as $item)
             <div class="single_product_item">
-              <img src="{{asset('client/img/product/product_1.png')}}" alt="">
+                <a href="{{route('product', $item->id)}}">
+              <img src="{{url('images/products/'.$item->image)}}"  width="270px" height="270px" alt="">
               <div class="single_product_text">
-                <h4>Quartz Belt Watch</h4>
-                <h3>$150.00</h3>
-              </div>
+                <h4>{{$item->name}}</h4>
+                <h3>{{ number_format($item->price)}} VNĐ</h3>
+              </div></a>
             </div>
+            @endforeach
             <div class="single_product_item">
               <img src="{{asset('client/img/product/product_2.png')}}" alt="">
               <div class="single_product_text">

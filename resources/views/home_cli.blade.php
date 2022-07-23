@@ -21,7 +21,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="section_tittle text-center">
-                    <h2>Featured Category</h2>
+                    <h2>Các danh mục chính</h2>
                 </div>
             </div>
         </div>
@@ -58,6 +58,14 @@
                     <img src="{{asset('client/img/feature/feature_4.png')}}" alt="">
                 </div>
             </div>
+            <div class="col-lg-12 col-sm-6">
+                <div class="single_feature_post_text">
+                    <p>Premium Quality</p>
+                    <h3>Latest foam Sofa</h3>
+                    <a href="#" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>
+                    <img src="{{asset('client/img/feature/feature_4.png')}}" alt="">
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -69,7 +77,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="section_tittle text-center">
-                    <h2>awesome <span>shop</span></h2>
+                    <h2>Sản phẩm mới nhất<span>shop</span></h2>
                 </div>
             </div>
         </div>
@@ -78,6 +86,18 @@
                 <div class="product_list_slider owl-carousel">
                     <div class="single_product_list_slider">
                         <div class="row align-items-center justify-content-between">
+                            @foreach ($product_new as $item)
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="single_product_item">
+                                    <img src="{{url('images/products/'.$item->image)}}" alt="">
+                                    <div class="single_product_text">
+                                        <h4>{{$item->name}}</h4>
+                                        <h3>{{ number_format($item->price)}} VNĐ</h3>
+                                        <a href="{{ route('add.to.cart', $item->id) }}" class="add_cart">+ Thêm vào giỏ<i class="ti-heart"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
                             <div class="col-lg-3 col-sm-6">
                                 <div class="single_product_item">
                                     <img src="{{asset('client/img/product/product_1.png')}}" alt="">
@@ -118,7 +138,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-sm-6">
+                            {{-- <div class="col-lg-3 col-sm-6">
                                 <div class="single_product_item">
                                     <img src="{{asset('client/img/product/product_5.png')}}" alt="">
                                     <div class="single_product_text">
@@ -157,7 +177,7 @@
                                         <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="single_product_list_slider">
@@ -202,7 +222,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-sm-6">
+                            {{-- <div class="col-lg-3 col-sm-6">
                                 <div class="single_product_item">
                                     <img src="{{asset('client/img/product/product_5.png')}}" alt="">
                                     <div class="single_product_text">
@@ -241,7 +261,7 @@
                                         <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

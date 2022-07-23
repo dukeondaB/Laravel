@@ -13,23 +13,23 @@
                         <div class="widgets_inner">
                             <ul class="list">
                                 <li>
-                                    <a href="#">Sofa</a>
+                                    <a href="">Sofa</a>
                                     <span>(250)</span>
                                 </li>
                                 <li>
-                                    <a href="#">Bàn ăn</a>
+                                    <a href="">Bàn ăn</a>
                                     <span>(250)</span>
                                 </li>
                                 <li>
-                                    <a href="#">Tủ quần áo</a>
+                                    <a href="">Tủ quần áo</a>
                                     <span>(250)</span>
                                 </li>
                                 <li>
-                                    <a href="#">Tủ giày</a>
+                                    <a href="">Tủ giày</a>
                                     <span>(250)</span>
                                 </li>
                                 <li>
-                                    <a href="#">Thảm</a>
+                                    <a href="">Thảm</a>
                                     <span>(250)</span>
                                 </li>
                                 <li>
@@ -132,7 +132,7 @@
                             <div class="single_product_text">
                                 <h4>{{$item->name}}</h4>
                                 <h3>{{number_format($item->price)}} <span class="text-danger">VNĐ</span></h3>
-                                <a href="" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                <a href="{{ route('add.to.cart', $item->id) }}" class="add_cart">+ Thêm vào giỏ<i class="ti-heart"></i></a>
                             </div>
                         </a>
                         </div>

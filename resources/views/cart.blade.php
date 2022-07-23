@@ -8,98 +8,44 @@
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">Product</th>
-                <th scope="col">Price</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Total</th>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Đơn giá</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>
-                  <div class="media">
-                    <div class="d-flex">
-                      <img src="{{asset('client/img/product/single-product/cart-1.jpg')}}" alt="" />
-                    </div>
-                    <div class="media-body">
-                      <p>Minimalistic shop for multipurpose use</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <h5>$360.00</h5>
-                </td>
-                <td>
-                  <div class="product_count">
-                    <span class="input-number-decrement"> <i class="ti-angle-down"></i></span>
-                    <input class="input-number" type="text" value="1" min="0" max="10">
-                    <span class="input-number-increment"> <i class="ti-angle-up"></i></span>
-                  </div>
-                </td>
-                <td>
-                  <h5>$720.00</h5>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="media">
-                    <div class="d-flex">
-                      <img src="{{asset('client/img/product/single-product/cart-1.jpg')}}" alt="" />
-                    </div>
-                    <div class="media-body">
-                      <p>Minimalistic shop for multipurpose use</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <h5>$360.00</h5>
-                </td>
-                <td>
-                  <div class="product_count">
-                    <!-- <input type="text" value="1" min="0" max="10" title="Quantity:"
-                      class="input-text qty input-number" />
-                    <button
-                      class="increase input-number-increment items-count" type="button">
-                      <i class="ti-angle-up"></i>
-                    </button>
-                    <button
-                      class="reduced input-number-decrement items-count" type="button">
-                      <i class="ti-angle-down"></i>
-                    </button> -->
-                    <span class="input-number-decrement"> <i class="ti-angle-down"></i></span>
-                    <input class="input-number" type="text" value="1" min="0" max="10">
-                    <span class="input-number-increment"> <i class="ti-angle-up"></i></span>
-                  </div>
-                </td>
-                <td>
-                  <h5>$720.00</h5>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="media">
-                    <div class="d-flex">
-                      <img src="{{asset('client/img/product/single-product/cart-1.jpg')}}" alt="" />
-                    </div>
-                    <div class="media-body">
-                      <p>Minimalistic shop for multipurpose use</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <h5>$360.00</h5>
-                </td>
-                <td>
-                  <div class="product_count">
-                    <span class="input-number-decrement"> <i class="ti-angle-down"></i></span>
-                    <input class="input-number" type="text" value="1" min="0" max="10">
-                    <span class="input-number-increment"> <i class="ti-angle-up"></i></span>
-                  </div>
-                </td>
-                <td>
-                  <h5>$720.00</h5>
-                </td>
-              </tr>
+                @php $total = 0 @endphp
+                @if(session('cart'))
+                @foreach(session('cart') as $id => $details)
+                    @php $total += $details['price'] * $details['quantity'] @endphp
+                    <tr data-id="{{ $id }}">
+                        <td data-th="Product">
+                            <div class="media">
+                                <div class="d-flex">
+                                  <img src="{{url('images/products/'.$details['image'])}}" width="200px" alt="" />
+                                </div>
+                                <div class="media-body" style="width: 250px">
+                                  <p>{{ $details['name'] }}</p>
+                                </div>
+                              </div>
+                        </td>
+                        <td data-th="Price">{{ number_format($details['price']) }}
+                        <span class="text-danger">VNĐ</span></td>
+                        <td data-th="Quantity">
+                            <input type="number" value="{{ $details['quantity'] }}" class="form-control quantity update-cart" style="width: 60px;" />
+                              {{-- <input class="input-number" type="text" value="{{ $details['quantity'] }}" min="0" max="10"> --}}
+                        </td>
+
+
+
+                        <td data-th="Subtotal" class="text-right">{{ number_format($details['price'] * $details['quantity']) }} <span class="text-danger">VNĐ</span></td>
+                        <td class="actions" data-th="">
+                            <button class="btn btn-sm remove-from-cart">x</button>
+                        </td>
+                    </tr>
+                @endforeach
+            @endif
               <tr class="bottom_button">
                 <td>
                   <a class="btn_1" href="#">Update Cart</a>
@@ -116,10 +62,10 @@
                 <td></td>
                 <td></td>
                 <td>
-                  <h5>Subtotal</h5>
+                  <h5>Tổng hóa đơn:</h5>
                 </td>
-                <td>
-                  <h5>$2160.00</h5>
+                <td class="text-right">
+                  <h5>{{ number_format($total) }} <span class="text-danger">VNĐ</span></h5>
                 </td>
               </tr>
               <tr class="shipping_area">
@@ -172,4 +118,46 @@
         </div>
       </div>
   </section>
+@endsection
+@section('script')
+  <script>
+      $(".update-cart").change(function (e) {
+        e.preventDefault();
+
+        var ele = $(this);
+
+        $.ajax({
+            url: '{{ route('update.cart') }}',
+            method: "patch",
+            data: {
+                _token: '{{ csrf_token() }}',
+                id: ele.parents("tr").attr("data-id"),
+                quantity: ele.parents("tr").find(".quantity").val()
+            },
+            success: function (response) {
+               window.location.reload();
+            }
+        });
+    });
+
+    $(".remove-from-cart").click(function (e) {
+        e.preventDefault();
+
+        var ele = $(this);
+
+        if(confirm("Bỏ sản phẩm này ra khỏi giỏ hàng?")) {
+            $.ajax({
+                url: '{{ route('remove.from.cart') }}',
+                method: "DELETE",
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: ele.parents("tr").attr("data-id")
+                },
+                success: function (response) {
+                    window.location.reload();
+                }
+            });
+        }
+    });
+  </script>
 @endsection

@@ -2,33 +2,24 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@yield('title')</title>
     <link rel="icon" href="img/favicon.png">
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('client/css/bootstrap.min.css') }}">
-    <!-- animate CSS -->
     <link rel="stylesheet" href="{{ asset('client/css/animate.css') }}">
-    <!-- owl carousel CSS -->
     <link rel="stylesheet" href="{{ asset('client/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('client/css/nice-select.css') }}">
     <link rel="stylesheet" href="{{ asset('client/css/lightslider.min.css') }}">
-    <!-- font awesome CSS -->
     <link rel="stylesheet" href="{{ asset('client/css/all.css') }}">
-    <!-- flaticon CSS -->
     <link rel="stylesheet" href="{{ asset('client/css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('client/css/themify-icons.css') }}">
-    <!-- font awesome CSS -->
     <link rel="stylesheet" href="{{ asset('client/css/magnific-popup.css') }}">
-    <!-- swiper CSS -->
     <link rel="stylesheet" href="{{ asset('client/css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('client/css/price_rangs.css') }}">
-    <!-- style CSS -->
     <link rel="stylesheet" href="{{ asset('client/css/style.css') }}">
     <link rel="stylesheet" href="{{asset('summernote/summernote.min.css')}}">
-    {{-- =============================== --}}
+    <link rel="shortcut icon" href="{{asset('client/favicon.ico')}}" />
 </head>
 
 <body>
@@ -66,95 +57,81 @@
 
                                     </div>
                                 </li> --}}
-                                {{-- <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                        pages
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                        <a class="dropdown-item" href="login.html"> login</a>
-                                        <a class="dropdown-item" href="tracking.html">tracking</a>
-                                        <a class="dropdown-item" href="checkout.html">product checkout</a>
-                                        <a class="dropdown-item" href="cart.html">shopping cart</a>
-                                        <a class="dropdown-item" href="confirmation.html">confirmation</a>
-                                        <a class="dropdown-item" href="elements.html">elements</a>
-                                    </div>
-                                </li> --}}
-                                {{-- <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_2"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                        blog
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                        <a class="dropdown-item" href="blog.html"> blog</a>
-                                        <a class="dropdown-item" href="single-blog.html">Single blog</a>
-                                    </div>
-                                </li> --}}
 
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{route('contact-form')}}">Liên hệ</a>
                                 </li>
                             </ul>
                         </div>
-                        {{-- phần bên phải --}}
+                        {{-- phần bên phải menu --}}
+                        {{-- phần login --}}
                         <div class="hearer_icon d-flex">
                             <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
-                            {{-- <a href=""><i class="ti-heart"></i></a> --}}
-
                             <div class="dropdown user">
                                 <a class="btn btn-dropdown-toggle" type="button" id="dropdownMenuButton"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-user" id="log"></i>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    {{-- <a href="" class="dropdown-item">{{ Auth::user()->name }}</a> --}}
                                     @guest
                                     @if (Route::has('login'))
-
                                             <a class="dropdown-item" href="{{ route('login') }}">{{ __('Đăng nhập') }}</a>
-
                                     @endif
-
                                     @if (Route::has('register'))
-
                                             <a class="dropdown-item" href="{{ route('register') }}">{{ __('Đăng ký') }}</a>
-
                                     @endif
                                 @else
-
                                         <a class="dropdown-item" href="">
                                             {{ Auth::user()->name }}
                                         </a>
                                         @if (Auth::user()->role_as === 1)
                                             <a href="{{route('dashboard')}}" class="dropdown-item">Vào dashboard</a>
                                         @endif
-
-
                                             <a class="dropdown-item" href="{{ route('logout') }}"
                                                onclick="event.preventDefault();
                                                              document.getElementById('logout-form').submit();">
                                                 {{ __('Logout') }}
                                             </a>
-
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                                 @csrf
                                             </form>
-
                                 @endguest
                                 </div>
                             </div>
-
+                            {{-- end login --}}
+{{-- cart --}}
                             <div class="dropdown cart">
                                 <a class="dropdown-toggle" href="{{route('cart')}}" id="navbarDropdown3" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-cart-plus"></i>
+                                    <i class="fas fa-cart-plus"></i><span class="badge badge-pill badge-danger">{{ count((array) session('cart')) }}</span>
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <div class="single_product">
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="min-width:20rem; right:0 !important">
+                                    <div class="single_product" style="padding: 10px">
+                                        <div class="row total-header-section">
+                                            @php $total = 0 @endphp
+                                            @foreach((array) session('cart') as $id => $details)
+                                                @php $total += $details['price'] * $details['quantity'] @endphp
+                                            @endforeach
+                                            <div class="col-lg-12 col-sm-12 col-12 total-section text-left">
+                                                <p>Tổng tiền: <span class="text-info"> {{ number_format($total) }} VNĐ</span></p>
+                                            </div>
+                                        </div>
+                                        @if(session('cart'))
+                                            @foreach(session('cart') as $id => $details)
+                                                <div class="row cart-detail">
+                                                    <div class="col-lg-4 col-sm-4 col-4 cart-detail-img">
+                                                        <img src="{{url('images/products/'.$details['image'])}}" />
+                                                    </div>
+                                                    <div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
+                                                        <p>{{ $details['name'] }}</p>
+                                                        <span class="price text-info"> {{ number_format($details['price']) }}VNĐ</span>
+                                                        <p><span class="count"> Số lượng:{{ $details['quantity'] }}</span></p>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @endif
                                         <div class="row">
-                                            <div class="col-lg-12 col-sm-12 col-12 text-center">
+                                            <div class="col-lg-12 col-sm-12 col-12 text-center checkout">
                                                 <a href="{{ route('cart') }}" class="btn btn-block">Xem giỏ hàng</a>
                                             </div>
                                         </div>
@@ -168,6 +145,7 @@
                 </div>
             </div>
         </div>
+        {{-- form search ẩn --}}
         <div class="search_input" id="search_input_box">
             <div class="container ">
                 <form class="d-flex justify-content-between search-inner">
@@ -178,6 +156,7 @@
             </div>
         </div>
     </header>
+    {{-- end nav --}}
     <section class="breadcrumb breadcrumb_bg">
         <div class="container">
           <div class="row justify-content-center">
@@ -193,7 +172,10 @@
         </div>
       </section>
     {{-- end menu --}}
+    {{-- content --}}
     @yield('content')
+    {{-- end content --}}
+    {{-- footer --}}
     <footer class="footer_part">
         <div class="container">
             <div class="row justify-content-around">
@@ -263,6 +245,7 @@
             </div>
 
         </div>
+        {{-- end content --}}
         <div class="copyright_part">
             <div class="container">
                 <div class="row">
@@ -300,21 +283,14 @@
     </footer>
 </body>
 <script src="{{ asset('client/js/jquery-1.12.1.min.js') }}"></script>
-<!-- popper js -->
 <script src="{{ asset('client/js/popper.min.js') }}"></script>
-<!-- bootstrap js -->
 <script src="{{ asset('client/js/bootstrap.min.js') }}"></script>
-<!-- easing js -->
 <script src="{{ asset('client/js/jquery.magnific-popup.js') }}"></script>
-<!-- swiper js -->
 <script src="{{ asset('client/js/swiper.min.js') }}"></script>
-<!-- swiper js -->
 <script src="{{ asset('client/js/masonry.pkgd.js') }}"></script>
 <script src="{{ asset('client/js/lightslider.min.js') }}"></script>
-<!-- particles js -->
 <script src="{{ asset('client/js/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('client/js/jquery.nice-select.min.js') }}"></script>
-<!-- slick js -->
 <script src="{{ asset('client/js/slick.min.js') }}"></script>
 <script src="{{ asset('client/js/jquery.counterup.min.js') }}"></script>
 <script src="{{ asset('client/js/waypoints.min.js') }}"></script>
@@ -325,7 +301,6 @@
 <script src="{{ asset('client/js/mail-script.js') }}"></script>
 <script src="{{ asset('client/js/stellar.js') }}"></script>
 <script src="{{ asset('client/js/price_rangs.js') }}"></script>
-<!-- custom js -->
 <script src="{{ asset('client/js/theme.js') }}"></script>
 <script src="{{ asset('client/js/custom.js') }}"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home_cli');
+        $product_new = Product::select('id','name','image','price')->orderBy('id','DESC')->get();
+        return view('home_cli', \compact('product_new'));
     }
 }

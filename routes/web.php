@@ -34,10 +34,17 @@ Route::prefix('/')->group(function(){
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::post('/',[ContactController::class, 'saveEmail'])->name('contact.email');
     Route::get('product',[ProductListController::class, 'index'])->name('product-list');
+    // sortType cực chuối
+    // Route::get('cate/{category}',[ProductListController::class,'SortType'])->name('cate');
+
     Route::get('contact',[ContactController::class, 'index'])->name('contact-form');
     Route::post('contact',[ContactController::class, 'save'])->name('contact.store');
     Route::get('product-detail/{product}', [ProductDetail::class, 'index'])->name('product');
+    // cart
     Route::get('cart',[CartController::class,'index'])->name('cart');
+    Route::get('add-to-cart/{product}', [ProductListController::class, 'addToCart'])->name('add.to.cart');
+    Route::patch('update-cart', [CartController::class, 'update'])->name('update.cart');
+    Route::delete('remove-from-cart', [CartController::class, 'remove'])->name('remove.from.cart');
 });
 Auth::routes();
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
