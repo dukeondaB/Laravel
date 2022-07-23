@@ -27,4 +27,5 @@ class HomeController extends Controller
         $product_new = Product::select('id','name','image','price')->orderBy('id','DESC')->limit(10)->get();
         return view('home_cli', \compact('product_new'));
     }
+
 }

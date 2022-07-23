@@ -153,6 +153,7 @@
                     <button type="submit" class="btn"></button>
                     <span class="ti-close" id="close_search" title="Close Search"></span>
                 </form>
+                <div id="product_list_search"></div>
             </div>
         </div>
     </header>
@@ -306,6 +307,32 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{asset('summernote/summernote.min.js')}}"></script>
 {{-- ========================= --}}
-
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#search_input').on('keyup',function () {
+            var query = $(this).val();
+            $.ajax({
+                url:'{{ route('search') }}',
+                type:'GET',
+                data:{'name':query},
+                success:function (data) {
+                    $('#product_list_search').html(data);
+                }
+            })
+        });
+        $(document).on('click', 'li', function(){
+            // var value = $(this).text();
+            // $('#search_input').val(value);
+            // $('#product_list_search').html("");
+        });
+    });
+</script>
+<script type="text/javascript">
+    var link = document.createElement("link");
+    link.setAttribute("rel","stylesheet");
+    link.setAttribute("href","{{asset('client/css/search.css')}}");
+    var head = document.getElementsByTagName("head")[0];
+    head.appendChild(link);
+  </script>
 @yield('script')
 </html>

@@ -11,6 +11,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductDetail;
 use App\Http\Controllers\ProductListController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,7 @@ Route::prefix('/')->group(function(){
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::post('/',[ContactController::class, 'saveEmail'])->name('contact.email');
     Route::get('product',[ProductListController::class, 'index'])->name('product-list');
+    Route::get('search', [SearchController::class, 'searchClient'])->name('search');
     // sortType cực chuối
     // Route::get('cate/{category}',[ProductListController::class,'SortType'])->name('cate');
 
