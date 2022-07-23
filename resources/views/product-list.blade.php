@@ -128,13 +128,14 @@
                         <div class="single_product_item">
 
                             <img src="{{url('images/products/'.$item->image)}}" width="270px" height="270px" alt="">
-                            <a href="{{route('product', $item->id)}}">
+
                             <div class="single_product_text">
                                 <h4>{{$item->name}}</h4>
                                 <h3>{{number_format($item->price)}} <span class="text-danger">VNĐ</span></h3>
-                                <a href="{{ route('add.to.cart', $item->id) }}" class="add_cart">+ Thêm vào giỏ<i class="ti-heart"></i></a>
+                                <a href="{{ route('add.to.cart', $item->id) }}" class="add_cart" style="font-size: 12px">Thêm nhanh vào giỏ</a>
+                                <a href="{{route('product', $item->id)}}">Xem chi tiết</a>
                             </div>
-                        </a>
+
                         </div>
                     </div>
                     @endforeach

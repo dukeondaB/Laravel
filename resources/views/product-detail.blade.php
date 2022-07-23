@@ -495,34 +495,6 @@
               </div></a>
             </div>
             @endforeach
-            <div class="single_product_item">
-              <img src="{{asset('client/img/product/product_2.png')}}" alt="">
-              <div class="single_product_text">
-                <h4>Quartz Belt Watch</h4>
-                <h3>$150.00</h3>
-              </div>
-            </div>
-            <div class="single_product_item">
-              <img src="{{asset('client/img/product/product_3.png')}}" alt="">
-              <div class="single_product_text">
-                <h4>Quartz Belt Watch</h4>
-                <h3>$150.00</h3>
-              </div>
-            </div>
-            <div class="single_product_item">
-              <img src="{{asset('client/img/product/product_4.png')}}" alt="">
-              <div class="single_product_text">
-                <h4>Quartz Belt Watch</h4>
-                <h3>$150.00</h3>
-              </div>
-            </div>
-            <div class="single_product_item">
-              <img src="{{asset('client/img/product/product_5.png')}}" alt="">
-              <div class="single_product_text">
-                <h4>Quartz Belt Watch</h4>
-                <h3>$150.00</h3>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -530,18 +502,3 @@
   </section>
 
 @endsection
-<script>
-    $(document).ready(function() {
-        $('#summernote').summernote({
-            placeholder: 'Nhập gì đó điiiiii',
-            tabsize: 2,
-      height: 200,
-      minHeight: 100,
-      maxHeight: 300,
-      focus: true,
-      codemirror: {
-        theme: 'monokai'
-      }
-        });
-    });
-  </script>

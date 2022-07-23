@@ -2111,7 +2111,7 @@ ul {
   top: 0;
   width: 100%;
   z-index: 999;
-  /* background-color: #ffffffbeb8; */
+  background-color: rgba(255, 255, 255, 0.751);
 }
 
 /* line 9, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
