@@ -15,11 +15,12 @@
                 </th>
                 <th>Tên sản phẩm</th>
                 <th>Giá sản phẩm</th>
-                <th>Chi tiết</th>
+                {{-- <th>Chi tiết</th> --}}
                 <th>Danh mục</th>
                 <th>Kích cỡ</th>
                 <th>Trạng thái</th>
                 <th>Ảnh</th>
+                <th>Lượt xem</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -35,12 +36,14 @@
                         {{ $item->name }}
                     </td>
                     <td>{{ number_format($item->price) }}</td>
-                    <td id="summernote">{!! $item->description !!}</td>
+                    <td id="summernote" hidden>{!! $item->description !!}</td>
                     <td>{{ $item->category->name}}</td>
                     <td>{{ $item->size->size_name }}</td>
 
                     <td>{{ $item->status == 1 ? 'hiện' : 'ẩn' }}</td>
                     <td><img id="product-img" src="{{ url('images/products/'.$item->image) }}" width="200px" alt=""></td>
+
+                    <td>{{$item->view}}</td>
                     <td>
                         <form action="{{route('products.destroy', $item->id)}}" method="Post">
                             <a class="btn btn-primary" href="{{ route('products.edit', $item->id) }}">Sửa</a>

@@ -15,7 +15,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $product = Product::select('id','name','price','image','description','status','cate_id','size_id')->paginate(5);
+        $product = Product::select('id','name','price','image','description','status','cate_id','size_id','view')->paginate(8);
         return \view('admin.product.index', \compact('product'));
     }
     public function create()
@@ -35,6 +35,7 @@ class ProductController extends Controller
         // $validateData = $request->validate();
         $product = new Product;
         $product->fill($request->all());
+        // \dd($request->image_list);
         $product->name = $request->name;
         $product->price = $request->price;
         $product->description = $request->description;
@@ -49,6 +50,16 @@ class ProductController extends Controller
             $product->image= $filename;
         }
         // Products::create($data);
+        $array_list = [];
+        if($image_list = $request->file('image_list'))
+        {
+            foreach($image_list as $multiFile){
+                $name_list = \date('YmHi').$multiFile->getClientOriginalName();
+                $product->image_list = $multiFile->storeAs('images/products', $name_list);
+                $array_list[] = $name_list;
+            };
+            $product->image_list = implode('|',$array_list);
+        }
         $product->save();
         return \redirect()->route('products.index');
     }
@@ -86,6 +97,16 @@ class ProductController extends Controller
             $filename= date('YmdHi').$file->getClientOriginalName();
             $file-> storeAs('images/products', $filename);
             $product->image= $filename;
+        }
+        $array_list = [];
+        if($image_list = $request->file('image_list'))
+        {
+            foreach($image_list as $multiFile){
+                $name_list = \date('YmHi').$multiFile->getClientOriginalName();
+                $product->image_list = $multiFile->storeAs('images/products', $name_list);
+                $array_list[] = $name_list;
+            };
+            $product->image_list = implode('|',$array_list);
         }
         $product->update();
         // $data = $request->all();

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductDetail;
@@ -36,8 +37,12 @@ Route::prefix('/')->group(function(){
     Route::post('/',[ContactController::class, 'saveEmail'])->name('contact.email');
     Route::get('product',[ProductListController::class, 'index'])->name('product-list');
     Route::get('search', [SearchController::class, 'searchClient'])->name('search');
+    Route::post('comment/add',[CommentController::class, 'addComment'])->name('comment.add');
+    Route::post('comment/reply',[CommentController::class, 'reply'])->name('comment.rep');
     // sortType cực chuối
-    // Route::get('cate/{category}',[ProductListController::class,'SortType'])->name('cate');
+    Route::get('category/{category}',[ProductListController::class,'sortByCate'])->name('sortByCate');
+    // sortSize
+    Route::get('size/{size}',[ProductListController::class,'sortBySize'])->name('sortBySize');
 
     Route::get('contact',[ContactController::class, 'index'])->name('contact-form');
     Route::post('contact',[ContactController::class, 'save'])->name('contact.store');
@@ -47,11 +52,11 @@ Route::prefix('/')->group(function(){
     Route::get('add-to-cart/{product}', [ProductListController::class, 'addToCart'])->name('add.to.cart');
     Route::patch('update-cart', [CartController::class, 'update'])->name('update.cart');
     Route::delete('remove-from-cart', [CartController::class, 'remove'])->name('remove.from.cart');
+    Route::post('test',[ProductListController::class,'sort'])->name('test');
 });
 Auth::routes();
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::resource('student', StudentController::class);
     Route::get('/users', [UsersController::class, 'index']);
     Route::get('/users/create', [UsersController::class, 'user_create'])->name('user.create');
     Route::post('/users/store', [UsersController::class, 'store']);
@@ -61,5 +66,4 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('size',[SizeController::class,'index'])->name('size');
     // Route::get('/search','ProductController@search');
     Route::get('products/search',[ProductController::class,'search'])->name('product-search');
-    Route::get('students/search',[StudentController::class,'search'])->name('student-search');
 });

@@ -23,7 +23,7 @@
         <label for="desc">
             Chi tiết:
         </label>
-            <textarea name="description" id="summernote" cols="30" rows="10" class="form-control"></textarea>
+            <textarea name="description" id="summernote" cols="80" rows="10" class="form-control"></textarea>
 
         <label for="">Kích thước</label>
         <select name="size_id" id="" class="form-control">
@@ -46,8 +46,12 @@
             <input type="checkbox" class="" name="status">
         </label>
         <div class="form-group">
-            <label for="image">Ảnh sản phẩm:</label>
+            <label for="image">Ảnh đại diện sản phẩm:</label>
             <input type="file" name="image" id="image" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="image">Ảnh chi tiết sản phẩm:</label>
+            <input type="file" name="image_list[]" multiple id="image" class="form-control">
           </div>
         <button type="submit" class="btn btn-success">Thêm Sản phẩm</button>
     </form>
@@ -65,7 +69,28 @@
       focus: true,
       codemirror: {
         theme: 'monokai'
-      }
+      },popover: {
+  image: [
+    ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+    ['float', ['floatLeft', 'floatRight', 'floatNone']],
+    ['remove', ['removeMedia']]
+  ],
+  link: [
+    ['link', ['linkDialogShow', 'unlink']]
+  ],
+  table: [
+    ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
+    ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
+  ],
+  air: [
+    ['color', ['color']],
+    ['font', ['bold', 'underline', 'clear']],
+    ['para', ['ul', 'paragraph']],
+    ['table', ['table']],
+    ['insert', ['link', 'picture']]
+  ]
+}
+
         });
     });
   </script>

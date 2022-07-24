@@ -15,7 +15,7 @@ class SearchController extends Controller
             if (count($data)>0) {
                 $output = '<ul class="list-group" style="" id="clientSearch">';
                 foreach ($data as $row) {
-                    $output .= '<a href="'.route('product', $row->id).'"><li class="list-group-item"><img src="'.url('images/products/'.$row->image).'" alt="">'.$row->name.'</li></a>';
+                    $output .= '<a href="'.route('product', $row->id).'"><li class="list-group-item"><img src="'.url('images/products/'.$row->image).'" alt=""><span>'.$row->name.'</span></li></a>';
                 }
                 $output .= '</ul>';
             }else {
@@ -23,7 +23,7 @@ class SearchController extends Controller
             }
             return $output;
         }
-        return view('autosearch');
+        // return view('autosearch');
     }
 
 }

@@ -16,6 +16,7 @@ class Product extends Model
         'image',
         'size_id',
         'cate_id',
+        'image_list'
     ];
     public function category()
     {
@@ -24,5 +25,9 @@ class Product extends Model
     public function size()
     {
         return $this->belongsTo(Size::class,'size_id','id');
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class)->whereNull('parent_id');
     }
 }

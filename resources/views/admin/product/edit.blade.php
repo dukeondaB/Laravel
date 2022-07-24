@@ -23,7 +23,7 @@
         <label for="desc">
             Chi tiết:
         </label>
-            <textarea name="description" id="summernote" cols="30" rows="10" class="form-control">{!! $product->description !!}</textarea>
+            <textarea name="description" id="summernote" cols="80" rows="10" class="form-control">{!! $product->description !!}</textarea>
 
         <label for="">Kích thước</label>
         <select name="size_id" id="" class="form-control">
@@ -52,6 +52,13 @@
           <div class="form-group">
             <img id="product-img" src="{{ url('images/products/'.$product->image) }}" width="200px" alt=""></td>
           </div>
+          <div class="form-group">
+            <label for="image">Ảnh chi tiết sản phẩm:</label>
+            <input type="file" name="image_list[]" multiple id="image" class="form-control">
+          </div>
+          @foreach ($product->image_list as $item)
+          <img src="{{ url('images/products/'.$item) }}" width="200px" alt="">
+          @endforeach
         <button type="submit" class="btn btn-success">Lưu Sản phẩm</button>
     </form>
 </div>
@@ -61,7 +68,7 @@
     $(document).ready(function() {
         $('#summernote').summernote({
             placeholder: 'Nhập gì đó điiiiii',
-            tabsize: 2,
+            tabsize: 10,
       height: 200,
       minHeight: 100,
       maxHeight: 300,

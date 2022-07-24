@@ -25,7 +25,8 @@ class HomeController extends Controller
     public function index()
     {
         $product_new = Product::select('id','name','image','price')->orderBy('id','DESC')->limit(10)->get();
-        return view('home_cli', \compact('product_new'));
+        $product_view =Product::select('id','name','image','price','view')->orderBy('view','DESC')->limit(9)->get();
+        return view('home_cli', \compact('product_new', 'product_view'));
     }
 
 }

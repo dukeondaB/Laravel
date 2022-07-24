@@ -28,17 +28,17 @@
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-7 col-sm-6">
                     <div class="single_feature_post_text">
-                        <p>Premium Quality</p>
-                        <h3>Latest foam Sofa</h3>
-                        <a href="#" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>
+                        <p>Tủ giày chất lượng cao siêu xịn xò đỉnh cao vũ trụ</p>
+                        <h3>Tủ Giày</h3>
+                        <a href="{{route('sortByCate',4)}}" class="feature_btn">Xem ngay <i class="fas fa-play"></i></a>
                         <img src="{{ asset('client/img/feature/feature_1.png') }}" alt="">
                     </div>
                 </div>
                 <div class="col-lg-5 col-sm-6">
                     <div class="single_feature_post_text">
-                        <p>Premium Quality</p>
-                        <h3>Latest foam Sofa</h3>
-                        <a href="#" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>
+                        <p>Tủ quần áo chất lượng cao</p>
+                        <h3>Tủ Quần Áo</h3>
+                        <a href="{{route('sortByCate',3)}}" class="feature_btn">Xem ngay <i class="fas fa-play"></i></a>
                         <img src="{{ asset('client/img/feature/feature_2.png') }}" alt="">
                     </div>
                 </div>
@@ -69,10 +69,8 @@
             </div>
         </div>
     </section>
-    <!-- upcoming_event part start-->
 
-    <!-- product_list start-->
-    <section class="product_list section_padding">
+    <section class="product_list">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
@@ -106,59 +104,32 @@
             </div>
         </div>
     </section>
-    <!-- product_list part start-->
 
-
-
-    <!-- product_list part start-->
-    <section class="product_list best_seller section_padding">
+    <section class="product_list best_seller ">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
                     <div class="section_tittle text-center">
-                        <h2>Best Sellers <span>shop</span></h2>
+                        <h2>Sản phẩm được quan tâm nhất <span>shop</span></h2>
                     </div>
                 </div>
             </div>
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-12">
                     <div class="best_product_slider owl-carousel">
+                        @foreach ($product_view as $item)
                         <div class="single_product_item">
-                            <img src="{{ asset('client/img/product/product_1.png') }}" alt="">
+                            <img src="{{ url('images/products/' . $item->image) }}" alt="">
                             <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                                <a href="">Thêm vào giỏ nhanh</a>
+                                <h4>{{ $item->name }}</h4>
+                                <h3>{{ number_format($item->price) }} VNĐ</h3>
+                                <a href="{{ route('add.to.cart', $item->id) }}" class="add_cart"
+                                    style="font-size: 12px">Thêm nhanh vào giỏ</a>
+                                <a href="{{ route('product', $item->id) }}">Xem chi tiết</a>
                             </div>
                         </div>
-                        <div class="single_product_item">
-                            <img src="{{ asset('client/img/product/product_2.png') }}" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                            </div>
-                        </div>
-                        <div class="single_product_item">
-                            <img src="{{ asset('client/img/product/product_3.png') }}" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                            </div>
-                        </div>
-                        <div class="single_product_item">
-                            <img src="{{ asset('client/img/product/product_4.png') }}" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                            </div>
-                        </div>
-                        <div class="single_product_item">
-                            <img src="{{ asset('client/img/product/product_5.png') }}" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                            </div>
-                        </div>
+                    @endforeach
+
                     </div>
                 </div>
             </div>

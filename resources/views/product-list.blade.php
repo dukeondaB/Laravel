@@ -1,5 +1,5 @@
 @extends('layouts.client')
-@section('title','Danh sách sản phẩm')
+@section('title') {{$pageTitle}} @endsection
 @section('content')
 <section class="cat_product_area section_padding">
     <div class="container">
@@ -12,33 +12,31 @@
                         </div>
                         <div class="widgets_inner">
                             <ul class="list">
-                                <li>
-                                    <a href="">Sofa</a>
+                               @foreach ($category as $item)
+                               <li>
+                                <a href="{{route('sortByCate',$item->id)}}">{{$item->name}}</a>
+                                <span>(250)</span>
+                            </li>
+                               @endforeach
+                                {{-- <li>
+                                    <a href="{{route('sortByCate', 2)}}">Bàn ăn</a>
                                     <span>(250)</span>
                                 </li>
                                 <li>
-                                    <a href="">Bàn ăn</a>
+                                    <a href="{{route('sortByCate', 3)}}">Tủ quần áo</a>
                                     <span>(250)</span>
                                 </li>
                                 <li>
-                                    <a href="">Tủ quần áo</a>
+                                    <a href="{{route('sortByCate', 4)}}">Tủ giày</a>
                                     <span>(250)</span>
                                 </li>
                                 <li>
-                                    <a href="">Tủ giày</a>
+                                    <a href="{{route('sortByCate', 5)}}">Thảm</a>
                                     <span>(250)</span>
-                                </li>
-                                <li>
-                                    <a href="">Thảm</a>
-                                    <span>(250)</span>
-                                </li>
-                                <li>
-                                    <a href="#">Đồ decor</a>
-                                    <span>(250)</span>
-                                </li>
-
+                                </li> --}}
                             </ul>
                         </div>
+
                     </aside>
                     <aside class="left_widgets p_filter_widgets">
                         <div class="l_w_title">
@@ -46,15 +44,13 @@
                         </div>
                         <div class="widgets_inner">
                             <ul class="list">
+                                @foreach ($size as $size)
                                 <li>
-                                    <a href="#">Lớn</a>
-                                </li>
-                                <li>
-                                    <a href="#">Vừa</a>
-                                </li>
-                                <li class="active">
-                                    <a href="#">Nhỏ</a>
-                                </li>
+                                 <a href="{{route('sortBySize',$size->id)}}">{{$size->size_name}}</a>
+
+                             </li>
+                                @endforeach
+
 
                             </ul>
                         </div>
@@ -64,22 +60,26 @@
                         <div class="l_w_title">
                             <h3>Price Filter</h3>
                         </div>
+                        <form action="{{route('test')}}" method="POST">
+                            @csrf
                         <div class="widgets_inner">
                             <div class="range_item">
-                                <!-- <div id="slider-range"></div> -->
+                                <div id="slider-range"></div>
                                 <input type="text" class="js-range-slider" value="" />
                                 <div class="d-flex">
                                     <div class="price_text">
                                         <p>Price :</p>
                                     </div>
                                     <div class="price_value d-flex justify-content-center">
-                                        <input type="text" class="js-input-from" id="amount" readonly />
+                                        <input type="text" class="js-input-from" name="min" id="amount" readonly />
                                         <span>to</span>
-                                        <input type="text" class="js-input-to" id="amount" readonly />
+                                        <input type="text" class="js-input-to" name="max" id="amount" readonly />
                                     </div>
                                 </div>
                             </div>
+                            <button>test</button>
                         </div>
+                    </form>
                     </aside>
                 </div>
             </div>
@@ -87,27 +87,20 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="product_top_bar d-flex justify-content-between align-items-center">
-                            <div class="single_product_menu">
-                                <p><span>10000 </span> Prodict Found</p>
+                            <div class="single_product_menu d-flex">
+                              <p> Số lượng sản phẩm: <span class="text-danger">{{$product->count()}}</span></p>
                             </div>
                             <div class="single_product_menu d-flex">
-                                <h5>short by : </h5>
+                                <h5>Lọc theo : </h5>
                                 <select>
-                                    <option data-display="Select">name</option>
-                                    <option value="1">price</option>
-                                    <option value="2">product</option>
+                                    <option value="0">Không lọc</option>
+                                    <option value="1">Tên</option>
+                                    <option value="2">Giá</option>
+                                    <option value="3">Ngày bày bán</option>
                                 </select>
                             </div>
-                            <div class="single_product_menu d-flex">
-                                <h5>show :</h5>
-                                <div class="top_pageniation">
-                                    <ul>
-                                        <li>1</li>
-                                        <li>2</li>
-                                        <li>3</li>
-                                    </ul>
-                                </div>
-                            </div>
+
+
                             <div class="single_product_menu d-flex">
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="search"
@@ -123,6 +116,7 @@
                 </div>
 {{-- sản phẩm ở đây --}}
                 <div class="row align-items-center latest_product_inner">
+
                     @foreach ($product as $item)
                     <div class="col-lg-4 col-sm-6">
                         <div class="single_product_item">
@@ -130,7 +124,8 @@
                             <img src="{{url('images/products/'.$item->image)}}" width="270px" height="270px" alt="">
 
                             <div class="single_product_text">
-                                <h4>{{$item->name}}</h4>
+                                <h4>{!!Str::limit($item->name,25)!!}</h4>
+
                                 <h3>{{number_format($item->price)}} <span class="text-danger">VNĐ</span></h3>
                                 <a href="{{ route('add.to.cart', $item->id) }}" class="add_cart" style="font-size: 12px">Thêm nhanh vào giỏ</a>
                                 <a href="{{route('product', $item->id)}}">Xem chi tiết</a>
@@ -139,145 +134,9 @@
                         </div>
                     </div>
                     @endforeach
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="single_product_item">
 
-                            <img src="{{asset('client/img/product/product_1.png')}}" alt="">
-                            <a href="product-detail">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                                <a href="" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                            </div>
-                        </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a href="product-detail">
-                        <div class="single_product_item">
-
-                            <img src="{{asset('client/img/product/product_2.png')}}" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                                <a href="" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                            </div>
-                        </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a href="product-detail">
-                        <div class="single_product_item">
-
-                            <img src="{{asset('client/img/product/product_3.png')}}" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                                <a href="" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                            </div>
-                        </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a href="product-detail">
-                        <div class="single_product_item">
-
-                            <img src="{{asset('client/img/product/product_4.png')}}" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                                <a href="" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                            </div>
-                        </div>
-                    </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a href="product-detail">
-                        <div class="single_product_item">
-
-                            <img src="{{asset('client/img/product/product_5.png')}}" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                                <a href="" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                            </div>
-                        </div>
-                    </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a href="product-detail">
-                        <div class="single_product_item">
-
-                            <img src="{{asset('client/img/product/product_6.png')}}" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                                <a href="" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                            </div>
-                        </div>
-                    </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a href="product-detail">
-                        <div class="single_product_item">
-
-                            <img src="{{asset('client/img/product/product_7.png')}}" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                                <a href="" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                            </div>
-                        </div>
-                    </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a href="product-detail">
-                        <div class="single_product_item">
-                            <img src="{{asset('client/img/product/product_8.png')}}" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                                <a href="" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                            </div>
-                        </div>
-                    </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a href="product-detail">
-                        <div class="single_product_item">
-
-                            <img src="{{asset('client/img/product/product_2.png')}}" alt="">
-                            <div class="single_product_text">
-                                <h4>Quartz Belt Watch</h4>
-                                <h3>$150.00</h3>
-                                <a href="" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                            </div>
-                        </div>
-                    </a>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="pageination">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Previous">
-                                            <i class="ti-angle-double-left"></i>
-                                        </a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">6</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
-                                            <i class="ti-angle-double-right"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
+                    <div class="col-lg-12" style="float: end">
+                            {{ $product->links() }}
                     </div>
                 </div>
             </div>
@@ -287,51 +146,33 @@
 <!--================End Category Product Area =================-->
 
 <!-- product_list part start-->
-<section class="product_list best_seller">
+<section class="product_list section_padding">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="section_tittle text-center">
-                    <h2>Best Sellers <span>shop</span></h2>
+                    <h2>Sản phẩm mới nhất</h2>
                 </div>
             </div>
         </div>
-        <div class="row align-items-center justify-content-between">
+        <div class="row">
             <div class="col-lg-12">
-                <div class="best_product_slider owl-carousel">
-                    <div class="single_product_item">
-                        <img src="{{asset('client/img/product/product_1.png')}}" alt="">
-                        <div class="single_product_text">
-                            <h4>Quartz Belt Watch</h4>
-                            <h3>$150.00</h3>
-                        </div>
-                    </div>
-                    <div class="single_product_item">
-                        <img src="{{asset('client/img/product/product_2.png')}}" alt="">
-                        <div class="single_product_text">
-                            <h4>Quartz Belt Watch</h4>
-                            <h3>$150.00</h3>
-                        </div>
-                    </div>
-                    <div class="single_product_item">
-                        <img src="{{asset('client/img/product/product_3.png')}}" alt="">
-                        <div class="single_product_text">
-                            <h4>Quartz Belt Watch</h4>
-                            <h3>$150.00</h3>
-                        </div>
-                    </div>
-                    <div class="single_product_item">
-                        <img src="{{asset('client/img/product/product_4.png')}}" alt="">
-                        <div class="single_product_text">
-                            <h4>Quartz Belt Watch</h4>
-                            <h3>$150.00</h3>
-                        </div>
-                    </div>
-                    <div class="single_product_item">
-                        <img src="{{asset('client/img/product/product_5.png')}}" alt="">
-                        <div class="single_product_text">
-                            <h4>Quartz Belt Watch</h4>
-                            <h3>$150.00</h3>
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-lg-12">
+                        <div class="best_product_slider owl-carousel">
+                            @foreach ($product_new as $item)
+                                <div class="single_product_item">
+                                    <img src="{{ url('images/products/' . $item->image) }}" alt="">
+                                    <div class="single_product_text">
+                                        <h4>{{ $item->name }}</h4>
+                                        <h3>{{ number_format($item->price) }} VNĐ</h3>
+                                        <a href="{{ route('add.to.cart', $item->id) }}" class="add_cart"
+                                            style="font-size: 12px">Thêm nhanh vào giỏ</a>
+                                        <a href="{{ route('product', $item->id) }}">Xem chi tiết</a>
+                                    </div>
+                                </div>
+                            @endforeach
+
                         </div>
                     </div>
                 </div>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Models\Users;
+
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Hash;
@@ -34,7 +34,7 @@ class UsersController extends Controller
     }
     public function index()
     {
-        $users = Users::all();
+        $users = User::all();
         return \view('admin.user.index', \compact('users'));
     }
 }

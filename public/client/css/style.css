@@ -2157,13 +2157,13 @@ ul {
 /* line 46, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
 .main_menu #search_input_box {
   position: fixed;
-  left: 50%;
+  left: 66%;
   -webkit-transform: translateX(-50%);
   -moz-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
   -o-transform: translateX(-50%);
   transform: translateX(-50%);
-  width: 100%;
+  width: 30%;
   max-width: 1140px;
   z-index: 999;
   text-align: center;
@@ -7823,5 +7823,23 @@ h6 {
     margin: auto;
     text-align: center;
 }
+#myBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: none;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+  }
 
+  #myBtn:hover {
+    background-color: #555;
+  }
 /*# sourceMappingURL=style.css.map */
