@@ -196,10 +196,10 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="rating_list">
-                                        <h3>Based on 3 Reviews</h3>
+                                        <h3>Hiện có {{ $product->rating->count() }} đánh giá</h3>
                                         <ul class="list">
                                             <li>
-                                                <a href="#">5 Star
+                                                <a href="#">5 sao
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
@@ -207,35 +207,32 @@
                                                     <i class="fa fa-star"></i> 01</a>
                                             </li>
                                             <li>
-                                                <a href="#">4 Star
+                                                <a href="#">4 sao
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
+
+                                                    <i class="fa fa-star"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#">3 sao
                                                     <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+
+
                                                     <i class="fa fa-star"></i> 01</a>
                                             </li>
                                             <li>
-                                                <a href="#">3 Star
+                                                <a href="#">2 sao
                                                     <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
+
+
+
                                                     <i class="fa fa-star"></i> 01</a>
                                             </li>
                                             <li>
-                                                <a href="#">2 Star
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i> 01</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">1 Star
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
+                                                <a href="#">1 sao
+
                                                     <i class="fa fa-star"></i> 01</a>
                                             </li>
                                         </ul>
@@ -243,106 +240,42 @@
                                 </div>
                             </div>
                             <div class="review_list">
+                                @foreach ($product->rating as $review)
                                 <div class="review_item">
-                                    <div class="media">
-                                        <div class="d-flex">
+                                        <div class="media">
+                                            {{-- <div class="d-flex">
                                             <img src="img/product/single-product/review-1.png" alt="" />
+                                        </div> --}}
+                                            <div class="media-body">
+                                                <h4>{{ $review->user->name }}</h4>
+                                                @for ($i = 0; $i < $review->rating; $i++)
+                                                    <i class="fa fa-star"></i>
+                                                @endfor
+                                                {{-- <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i> --}}
+                                            </div>
                                         </div>
-                                        <div class="media-body">
-                                            <h4>Blake Ruiz</h4>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor incididunt ut labore et dolore magna
-                                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                        ullamco laboris nisi ut aliquip ex ea commodo
-                                    </p>
+                                        <p>
+                                            {{ $review->review }}
+                                        </p>
                                 </div>
-                                <div class="review_item">
-                                    <div class="media">
-                                        <div class="d-flex">
-                                            <img src="img/product/single-product/review-2.png" alt="" />
-                                        </div>
-                                        <div class="media-body">
-                                            <h4>Blake Ruiz</h4>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor incididunt ut labore et dolore magna
-                                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                        ullamco laboris nisi ut aliquip ex ea commodo
-                                    </p>
-                                </div>
-                                <div class="review_item">
-                                    <div class="media">
-                                        <div class="d-flex">
-                                            <img src="img/product/single-product/review-3.png" alt="" />
-                                        </div>
-                                        <div class="media-body">
-                                            <h4>Blake Ruiz</h4>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor incididunt ut labore et dolore magna
-                                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                        ullamco laboris nisi ut aliquip ex ea commodo
-                                    </p>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="review_box">
-                                <h4>Add a Review</h4>
-                                <p>Your Rating:</p>
-                                <ul class="list">
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-star"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-star"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-star"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-star"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-star"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <p>Outstanding</p>
-                                <form class="row contact_form" action="contact_process.php" method="post"
-                                    novalidate="novalidate">
-                                    <div class="col-md-12">
+                                <form class="row contact_form" action="{{ route('rating') }}" method="POST"> @csrf
+                                    <div>
+                                        <h4>Thêm một đánh giá</h4>
+                                        <p>Your Rating:</p>
+                                        <label for="input-1" class="control-label">Rate This</label>
+                                        <input id="input-1" name="rating" class="rating rating-loading"
+                                            data-min="0" data-max="5" data-step="1">
+                                        <p>Outstanding</p>
+                                    </div>
+                                    {{-- <div class="col-md-12">
                                         <div class="form-group">
                                             <input type="text" class="form-control" name="name"
                                                 placeholder="Your Full name" />
@@ -359,15 +292,16 @@
                                             <input type="text" class="form-control" name="number"
                                                 placeholder="Phone Number" />
                                         </div>
-                                    </div>
+                                    </div> --}}
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}" />
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea class="form-control" name="message" rows="1" placeholder="Review"></textarea>
+                                            <textarea class="form-control" name="review" rows="1" placeholder="Review"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12 text-right">
                                         <button type="submit" value="submit" class="btn_3">
-                                            Submit Now
+                                            Gửi đánh giá
                                         </button>
                                     </div>
                                 </form>
@@ -396,8 +330,8 @@
                         @foreach ($related_products as $item)
                             <div class="single_product_item">
                                 <a href="{{ route('product', $item->id) }}">
-                                    <img src="{{ url('images/products/' . $item->image) }}" width="270px" height="270px"
-                                        alt="">
+                                    <img src="{{ url('images/products/' . $item->image) }}" width="270px"
+                                        height="270px" alt="">
                                     <div class="single_product_text">
                                         <h4>{{ $item->name }}</h4>
                                         <h3>{{ number_format($item->price) }} VNĐ</h3>
@@ -442,5 +376,10 @@
         //         }
         //     });
         // });
+    </script>
+    <script>
+        $('.rating').on('change', function() {
+            console.log($(this).val());
+        })
     </script>
 @endsection

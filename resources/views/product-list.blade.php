@@ -15,7 +15,7 @@
                                @foreach ($category as $item)
                                <li>
                                 <a href="{{route('sortByCate',$item->id)}}">{{$item->name}}</a>
-                                <span>(250)</span>
+                                {{-- <span>()</span> --}}
                             </li>
                                @endforeach
                                 {{-- <li>
@@ -58,9 +58,9 @@
 
                     <aside class="left_widgets p_filter_widgets price_rangs_aside">
                         <div class="l_w_title">
-                            <h3>Price Filter</h3>
+                            <h3>Lọc theo giá</h3>
                         </div>
-                        <form action="{{route('test')}}" method="POST">
+                        <form action="{{route('sortByPrice')}}" method="POST">
                             @csrf
                         <div class="widgets_inner">
                             <div class="range_item">
@@ -68,7 +68,7 @@
                                 <input type="text" class="js-range-slider" value="" />
                                 <div class="d-flex">
                                     <div class="price_text">
-                                        <p>Price :</p>
+                                        <p>Khoảng giá :</p>
                                     </div>
                                     <div class="price_value d-flex justify-content-center">
                                         <input type="text" class="js-input-from" name="min" id="amount" readonly />
@@ -77,7 +77,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button>test</button>
+                            <button class="btn btn-danger">Lọc</button>
                         </div>
                     </form>
                     </aside>

@@ -18,6 +18,8 @@
   <!-- endinject -->
   <link rel="shortcut icon" href="{{asset('admin/images/favicon.png')}}" />
   <link rel="stylesheet" href="{{asset('summernote/summernote.min.css')}}">
+  <link rel="stylesheet" href="{{asset('bootstrap-toggle-master/css/bootstrap-toggle.min.css')}}">
+
 </head>
 <body>
 
@@ -75,8 +77,9 @@
 <!-- End custom js for this page-->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{asset('admin/js/jquery.cookie.js')}}" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{{asset('auth/js/jquery.min.js')}}"></script>
 <script src="{{asset('summernote/summernote.min.js')}}"></script>
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
 @yield('script')
 </body>

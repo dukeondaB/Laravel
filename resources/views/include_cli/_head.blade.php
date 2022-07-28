@@ -17,4 +17,6 @@
     <link rel="stylesheet" href="{{ asset('client/css/style.css') }}">
     <link rel="stylesheet" href="{{asset('summernote/summernote.min.css')}}">
     <link rel="shortcut icon" href="{{asset('client/favicon.ico')}}" />
+    <link rel="stylesheet" href="{{asset('rating/star-rating.css')}}">
+    <link rel="stylesheet" href="{{asset('rating/theme.css')}}">
 </head>

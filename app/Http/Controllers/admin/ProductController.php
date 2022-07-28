@@ -127,9 +127,14 @@ class ProductController extends Controller
                     <td>' . $item->id . '</td>
                     <td>' . $item->name . '</td>
                     <td>' . $item->price . '</td>
-                    <td>' . $item->description . '</td>
-                    <td>' . $item->status . '</td>
-                    <td><img id="product-img" src="'.url('Image/'.$item->image) .'" width="200px" alt=""></td>
+                    <td>' . $item->category->name . '</td>
+                    <td>' . $item->size->size_name . '</td>
+                    <td>  <input data-id="'.$item->id.'" class="toggle-class" type="checkbox" data-onstyle="success"
+                    data-offstyle="danger" data-toggle="toggle" data-on="Hiện"
+                    data-off="Ẩn"'. $item->status == 1 ? 'checked' : ''.'>' . '</td>
+
+
+                    <td><img id="product-img" src="'.url('images/products/'.$item->image) .'" width="200px" alt=""></td>
                     </tr>';
                 }
             }
@@ -137,5 +142,11 @@ class ProductController extends Controller
             return Response($output);
             // return \view('admin.product.index');
         }
+    }
+    public function changeStatus(Request $request){
+        $product = Product::find($request->product_id);
+        $product->status = $request->status;
+        $product->save();
+        return response()->json(['success'=>'Status change successfully.']);
     }
 }

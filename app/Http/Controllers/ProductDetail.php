@@ -14,6 +14,7 @@ class ProductDetail extends Controller
         // view + 1
         $product->increment('view',1);
         // \dd($product);
+
         return \view('product-detail',[
             'product' => $product,
             'related_products' => $related_products

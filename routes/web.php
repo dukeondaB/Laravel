@@ -12,6 +12,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductDetail;
 use App\Http\Controllers\ProductListController;
+use App\Http\Controllers\ratingController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,6 +40,7 @@ Route::prefix('/')->group(function(){
     Route::get('search', [SearchController::class, 'searchClient'])->name('search');
     Route::post('comment/add',[CommentController::class, 'addComment'])->name('comment.add');
     Route::post('comment/reply',[CommentController::class, 'reply'])->name('comment.rep');
+    Route::post('/review',[ratingController::class, 'addRating'])->name('rating');
     // sortType cực chuối
     Route::get('category/{category}',[ProductListController::class,'sortByCate'])->name('sortByCate');
     // sortSize
@@ -52,7 +54,13 @@ Route::prefix('/')->group(function(){
     Route::get('add-to-cart/{product}', [ProductListController::class, 'addToCart'])->name('add.to.cart');
     Route::patch('update-cart', [CartController::class, 'update'])->name('update.cart');
     Route::delete('remove-from-cart', [CartController::class, 'remove'])->name('remove.from.cart');
-    Route::post('test',[ProductListController::class,'sort'])->name('test');
+    Route::post('test',[ProductListController::class,'sortByPrice'])->name('sortByPrice');
+    Route::get('/checkout',function(){
+        return view('checkout');
+    })->name('checkout');
+    Route::get('/comfirm', function(){
+        return view('confirm');
+    })->name('confirm');
 });
 Auth::routes();
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
@@ -61,9 +69,10 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/users/create', [UsersController::class, 'user_create'])->name('user.create');
     Route::post('/users/store', [UsersController::class, 'store']);
     Route::resource('products',ProductController::class);
+    Route::get('product/changeStatus',[ProductController::class,'changeStatus'])->name('product_changeStatus');
     Route::get('contact',[ContactController::class,'show'])->name('admin.contact');
     Route::get('category',[CategoryController::class,'index'])->name('category');
     Route::get('size',[SizeController::class,'index'])->name('size');
     // Route::get('/search','ProductController@search');
-    Route::get('products/search',[ProductController::class,'search'])->name('product-search');
 });
+Route::get('products/search',[ProductController::class,'search'])->name('product-search');

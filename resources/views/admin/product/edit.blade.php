@@ -56,9 +56,11 @@
             <label for="image">Ảnh chi tiết sản phẩm:</label>
             <input type="file" name="image_list[]" multiple id="image" class="form-control">
           </div>
-          @foreach ($product->image_list as $item)
-          <img src="{{ url('images/products/'.$item) }}" width="200px" alt="">
-          @endforeach
+          <div class="form-group">
+              @foreach (explode('|', $product->image_list) as $item)
+              <img src="{{ url('images/products/'.$item) }}" width="200px" alt="">
+              @endforeach
+          </div>
         <button type="submit" class="btn btn-success">Lưu Sản phẩm</button>
     </form>
 </div>

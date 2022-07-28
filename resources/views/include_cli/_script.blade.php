@@ -21,6 +21,8 @@
 <script src="{{ asset('client/js/custom.js') }}"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{asset('summernote/summernote.min.js')}}"></script>
+<script src="{{asset('rating/star-rating.js')}}"></script>
+<script src="{{asset('rating/theme.js')}}"></script>
 {{-- ========================= --}}
 <script type="text/javascript">
     $(document).ready(function(){
