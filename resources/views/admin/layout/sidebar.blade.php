@@ -23,7 +23,7 @@
         <a class="nav-link" href="users">
 
           <i class="mdi mdi-chart-pie menu-icon"></i>
-          <span class="menu-title">User tĩnh</span>
+          <span class="menu-title">User</span>
         </a>
       </li>
       <li class="nav-item">

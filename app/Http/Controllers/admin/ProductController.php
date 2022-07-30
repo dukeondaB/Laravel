@@ -15,7 +15,11 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $product = Product::select('id','name','price','image','description','status','cate_id','size_id','view')->paginate(8);
+        $product = Product::select('id','name','price','image','description','status','cate_id','size_id','view')
+        ->with('size')
+        ->with('category') //truy vaasn theem quan hệ trước khi show ra nếu để show mới lặp và truy vấn sẽ gây n+1 query
+        ->paginate(8);
+        // \dd($product);
         return \view('admin.product.index', \compact('product'));
     }
     public function create()

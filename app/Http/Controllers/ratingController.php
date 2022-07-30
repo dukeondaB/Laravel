@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Rating;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ratingController extends Controller
 {
@@ -11,10 +12,11 @@ class ratingController extends Controller
     {
         $input = new Rating;
         $input->fill($request->all());
-
-        // $input->review = $request->review;
-        // $input->rating = $request->input;
         $input->user_id = \auth()->user()->id;
+        $ratingCheck = Rating::where(['user_id'=>Auth::user()->id,'product_id'=>$input['product_id']])->count();
+        if ($ratingCheck>0) {
+            $message = "Bạn đã đánh giá sản phẩm này rồi";
+        }
         $input->save();
         return back();
     }

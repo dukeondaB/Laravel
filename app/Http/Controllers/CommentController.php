@@ -15,6 +15,7 @@ class CommentController extends Controller
             'comment'=>'required',
         ]);
         $input['user_id'] = auth()->user()->id;
+        // $input['parent_id'] = 0;
         Comment::create($input);
         return back();
     }

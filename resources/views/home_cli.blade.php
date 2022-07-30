@@ -31,7 +31,7 @@
                         <p>Tủ giày chất lượng cao siêu xịn xò đỉnh cao vũ trụ</p>
                         <h3>Tủ Giày</h3>
                         <a href="{{route('sortByCate',4)}}" class="feature_btn">Xem ngay <i class="fas fa-play"></i></a>
-                        <img src="{{ asset('client/img/feature/feature_1.png') }}" alt="">
+                        <img src="{{ asset('client/img/feature/pngtree-shoe-cabinet-png-image_2417691-removebg-preview.png') }}" width="70%" alt="">
                     </div>
                 </div>
                 <div class="col-lg-5 col-sm-6">
@@ -39,31 +39,31 @@
                         <p>Tủ quần áo chất lượng cao</p>
                         <h3>Tủ Quần Áo</h3>
                         <a href="{{route('sortByCate',3)}}" class="feature_btn">Xem ngay <i class="fas fa-play"></i></a>
-                        <img src="{{ asset('client/img/feature/feature_2.png') }}" alt="">
+                        <img src="{{ asset('client/img/feature/53-534154_wardrobe-png-transparent-picture-wardrobe-png-removebg-preview.png') }}" alt="" width="80%">
                     </div>
                 </div>
                 <div class="col-lg-5 col-sm-6">
                     <div class="single_feature_post_text">
                         <p>Premium Quality</p>
-                        <h3>Latest foam Sofa</h3>
-                        <a href="#" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>
-                        <img src="{{ asset('client/img/feature/feature_3.png') }}" alt="">
+                        <h3>Thảm</h3>
+                        <a href="{{route('sortByCate',5)}}" class="feature_btn">Xem ngay <i class="fas fa-play"></i></a>
+                        <img src="{{ asset('client/img/feature/carpet-rug-KaEw5R9-600-removebg-preview.png') }}" alt="">
                     </div>
                 </div>
                 <div class="col-lg-7 col-sm-6">
                     <div class="single_feature_post_text">
                         <p>Premium Quality</p>
-                        <h3>Latest foam Sofa</h3>
-                        <a href="#" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>
-                        <img src="{{ asset('client/img/feature/feature_4.png') }}" alt="">
+                        <h3>Bàn ăn</h3>
+                        <a href="{{route('sortByCate',2)}}" class="feature_btn">Xem ngay <i class="fas fa-play"></i></a>
+                        <img src="{{ asset('client/img/feature/ban_an_go_chan_sat_porto_1m8-768x511-removebg-preview.png') }}" alt="">
                     </div>
                 </div>
                 <div class="col-lg-12 col-sm-6">
                     <div class="single_feature_post_text">
-                        <p>Premium Quality</p>
-                        <h3>Latest foam Sofa</h3>
-                        <a href="#" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>
-                        <img src="{{ asset('client/img/feature/feature_4.png') }}" alt="">
+                        <p>Sofa gia đình chất lượng tốt</p>
+                        <h3>Sofa</h3>
+                        <a href="{{route('sortByCate',1)}}" class="feature_btn">Xem ngay <i class="fas fa-play"></i></a>
+                        <img src="{{ asset('client/img/feature/11578208737-804118106-removebg-preview.png') }}" width="60%" alt="">
                     </div>
                 </div>
             </div>
@@ -145,10 +145,10 @@
                     <div class="subscribe_area_text text-center">
                         <h5>Tham gia đăng ký tin tức</h5>
                         <h2>Đăng ký để nhận những tin tức mới nhất</h2>
-                        <form action="{{ route('contact.email') }}" method="POST">
+                        <form action="{{ route('contact.email') }}" method="POST" name="sub">
                             @csrf
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="nhập email tại đây" a
+                                <input type="text" class="form-control" placeholder="nhập email tại đây"
                                     name="email">
                                 <div class="input-group-append">
                                     <button class="input-group-text btn_2" id="basic-addon2">Đăng ký ngay</button>
@@ -164,5 +164,9 @@
 
 @endsection
 @section('script')
-
+    <script>
+        $(document).on('submit','.sub' function () {
+            alert('msg');
+        });
+    </script>
 @endsection

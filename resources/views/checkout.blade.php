@@ -15,7 +15,7 @@
       </div>
       <div class="billing_details">
         <div class="row">
-          <div class="col-lg-8">
+          <div class="col-lg-6">
             <h3>Chi tiết đơn hàng</h3>
             <form class="row contact_form" action="#" method="post" novalidate="novalidate">
               <div class="col-md-6 form-group p_star">
@@ -80,47 +80,45 @@
               </div>
             </form>
           </div>
-          <div class="col-lg-4">
+          <div class="col-lg-6">
             <div class="order_box">
-              <h2>Your Order</h2>
+              <h2>Sản phẩm bạn đã đặt</h2>
               <ul class="list">
                 <li>
-                  <a href="#">Product
-                    <span>Total</span>
+                  <a>Sản phẩm
+
+                    <span class="">Giá</span>
+
+                  </a>
+                </li>
+                @php
+                    $total = 0
+                @endphp
+                @if (session('cart'))
+                @foreach (session('cart') as $id => $details)
+                @php $total += $details['price'] * $details['quantity'] @endphp
+                <li>
+                  <a> {!!Str::limit($details['name'],25)!!}
+                    <span class="middle">x {{$details['quantity']}}</span>
+                    <span class="last">{{ number_format($details['price'] * $details['quantity']) }}VNĐ</span>
+                  </a>
+                </li>
+
+                @endforeach
+                @endif
+                <ul class="list list_2">
+                    <li>
+                        <a href="#">Tổng giá sản phẩm
+                            <span>{{ number_format($total) }}  <span class="text-danger"> VNĐ</span></span>
                   </a>
                 </li>
                 <li>
-                  <a href="#">Fresh Blackberry
-                    <span class="middle">x 02</span>
-                    <span class="last">$720.00</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Fresh Tomatoes
-                    <span class="middle">x 02</span>
-                    <span class="last">$720.00</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Fresh Brocoli
-                    <span class="middle">x 02</span>
-                    <span class="last">$720.00</span>
-                  </a>
-                </li>
-              </ul>
-              <ul class="list list_2">
-                <li>
-                  <a href="#">Subtotal
-                    <span>$2160.00</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Shipping
+                  <a href="#">Phí ship
                     <span>Flat rate: $50.00</span>
                   </a>
                 </li>
                 <li>
-                  <a href="#">Total
+                  <a href="#">Tổng
                     <span>$2210.00</span>
                   </a>
                 </li>

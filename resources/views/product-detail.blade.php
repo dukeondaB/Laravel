@@ -269,30 +269,14 @@
                                 <form class="row contact_form" action="{{ route('rating') }}" method="POST"> @csrf
                                     <div>
                                         <h4>Thêm một đánh giá</h4>
-                                        <p>Your Rating:</p>
-                                        <label for="input-1" class="control-label">Rate This</label>
+                                        @if (Auth::check())
+
+                                        <label for="input-1" class="control-label">Đánh giá</label>
                                         <input id="input-1" name="rating" class="rating rating-loading"
                                             data-min="0" data-max="5" data-step="1">
-                                        <p>Outstanding</p>
+
                                     </div>
-                                    {{-- <div class="col-md-12">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" name="name"
-                                                placeholder="Your Full name" />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <input type="email" class="form-control" name="email"
-                                                placeholder="Email Address" />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" name="number"
-                                                placeholder="Phone Number" />
-                                        </div>
-                                    </div> --}}
+
                                     <input type="hidden" name="product_id" value="{{ $product->id }}" />
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -304,6 +288,10 @@
                                             Gửi đánh giá
                                         </button>
                                     </div>
+                                    @else
+                                    <a href="{{route('login')}}"><p class="text-danger">Bạn cần đăng nhập để đánh giá sản phẩm</p></a>
+                                        @endif
+
                                 </form>
                             </div>
                         </div>

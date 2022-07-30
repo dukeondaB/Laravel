@@ -79,7 +79,8 @@
 <script src="{{asset('admin/js/jquery.cookie.js')}}" type="text/javascript"></script>
 <script src="{{asset('auth/js/jquery.min.js')}}"></script>
 <script src="{{asset('summernote/summernote.min.js')}}"></script>
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+{{-- <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script> --}}
+<script src="{{asset('bootstrap-toggle-master/js/bootstrap-toggle.js')}}"></script>
 
 @yield('script')
 </body>

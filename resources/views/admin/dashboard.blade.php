@@ -1,5 +1,5 @@
 @extends('admin.layout.master')
-@section('content-title') <h2>Dashboard</h2> @endsection
+@section('title') Dashboard @endsection
 @section('content')
 {{-- chỗ này để thay vào chỗ yeild chỗ layout --}}
 <div class="row">
@@ -7,9 +7,7 @@
       <div class="d-flex justify-content-between flex-wrap">
         <div class="d-flex align-items-end flex-wrap">
           <div class="me-md-3 me-xl-5">
-            @if (session('message'))
-                 <h2>{{session('message')}} {{ Auth::user()->name }}</h2>
-            @endif
+
 
             <p class="mb-md-0">Your analytics dashboard template.</p>
           </div>
