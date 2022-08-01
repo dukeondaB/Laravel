@@ -82,7 +82,7 @@
                                             <a class="dropdown-item" href="{{ route('register') }}">{{ __('Đăng ký') }}</a>
                                     @endif
                                 @else
-                                        <a class="dropdown-item" href="">
+                                        <a class="dropdown-item" href="{{route('tracking')}}">
                                             {{ Auth::user()->name }}
                                         </a>
                                         @if (Auth::user()->role_as === 1)

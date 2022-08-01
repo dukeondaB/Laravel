@@ -14,13 +14,13 @@
             <h4>Thông tin đơn hàng</h4>
             <ul>
               <li>
-                <p>Mã đơn hàng</p><span>: 60235</span>
+                <p>Mã đơn hàng</p><span>: {{$input->trans_code}}</span>
               </li>
               <li>
-                <p>Đặt hàng ngày</p><span>: Oct 03, 2017</span>
+                <p>Đặt hàng ngày</p><span>: {{$input->created_at}}</span>
               </li>
               <li>
-                <p>Tổng tiền</p><span>: USD 2210</span>
+                <p>Tổng tiền</p><span>: {{$input->total_price}}</span>
               </li>
               <li>
                 <p>Phương thức thanh toán</p><span>: Check payments</span>
@@ -32,18 +32,7 @@
           <div class="single_confirmation_details">
             <h4>Địa chỉ giao hàng</h4>
             <ul>
-              <li>
-                <p>Street</p><span>: 56/8</span>
-              </li>
-              <li>
-                <p>city</p><span>: Los Angeles</span>
-              </li>
-              <li>
-                <p>country</p><span>: United States</span>
-              </li>
-              <li>
-                <p>postcode</p><span>: 36952</span>
-              </li>
+             <span>{{$input->address}}</span>
             </ul>
           </div>
         </div>
@@ -52,16 +41,13 @@
             <h4>Địa chỉ gửi hàng</h4>
             <ul>
               <li>
-                <p>Street</p><span>: 56/8</span>
+                <p>Đường</p><span>: Trịnh Văn Bô</span>
               </li>
               <li>
-                <p>city</p><span>: Los Angeles</span>
+                <p>Quận</p><span>: Nam Từ Liêm</span>
               </li>
               <li>
-                <p>country</p><span>: United States</span>
-              </li>
-              <li>
-                <p>postcode</p><span>: 36952</span>
+                <p>Thành Phố</p><span>: Hà Nội</span>
               </li>
             </ul>
           </div>
@@ -74,41 +60,45 @@
             <table class="table table-borderless">
               <thead>
                 <tr>
-                  <th scope="col" colspan="2">Product</th>
-                  <th scope="col">Quantity</th>
-                  <th scope="col">Total</th>
+                  <th scope="col" colspan="2">Sản phẩm</th>
+                  <th scope="col">Số lượng</th>
+                  <th scope="col">Đơn giá</th>
                 </tr>
               </thead>
               <tbody>
+                @if (session('cart'))
+
+                @foreach (session('cart') as $id => $item)
+
                 <tr>
+                  <th colspan="2"><span>{{$item['name']}}</span></th>
+                  <th>{{$item['quantity']}}</th>
+                  <th> <span>{{number_format($item['price'])}}VNĐ</span></th>
+                </tr>
+                @endforeach
+                {{session()->forget('cart')}}
+                @endif
+                {{-- <tr>
                   <th colspan="2"><span>Pixelstore fresh Blackberry</span></th>
                   <th>x02</th>
                   <th> <span>$720.00</span></th>
                 </tr>
-                <tr>
-                  <th colspan="2"><span>Pixelstore fresh Blackberry</span></th>
+                <tr> --}}
+                  {{-- <th colspan="2"><span>{{$}}</span></th>
                   <th>x02</th>
                   <th> <span>$720.00</span></th>
-                </tr>
-                <tr>
-                  <th colspan="2"><span>Pixelstore fresh Blackberry</span></th>
-                  <th>x02</th>
-                  <th> <span>$720.00</span></th>
-                </tr>
-                <tr>
-                  <th colspan="3">Subtotal</th>
-                  <th> <span>$2160.00</span></th>
-                </tr>
-                <tr>
-                  <th colspan="3">shipping</th>
-                  <th><span>flat rate: $50.00</span></th>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th scope="col" colspan="3">Số lượng</th>
-                  <th scope="col">Tổng tiền</th>
-                </tr>
+                </tr> --}}
+            </tbody>
+            <tfoot>
+                  <tr>
+                    <th colspan="3">Tổng tiền</th>
+                    <th> <span>{{number_format($input->total_price)}}VNĐ</span></th>
+                  </tr>
+                  <tr>
+                    <th colspan="3">shipping</th>
+                    <th><span>flat rate: $50.00</span></th>
+                  </tr>
+
               </tfoot>
             </table>
           </div>

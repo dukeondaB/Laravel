@@ -3,7 +3,7 @@
 @section('content')
 <section class="checkout_area padding_top">
     <div class="container">
-      <div class="cupon_area">
+      {{-- <div class="cupon_area">
         <div class="check_title">
           <h2>
             Bạn có mã giảm giấ?
@@ -12,73 +12,75 @@
         </div>
         <input type="text" placeholder="Enter coupon code" />
         <a class="tp_btn" href="#">Áp dụng mã giảm giá</a>
-      </div>
+      </div> --}}
       <div class="billing_details">
+          <form class="row contact_form" action="{{route('addTransaction')}}" method="post">
+              @csrf
         <div class="row">
           <div class="col-lg-6">
             <h3>Chi tiết đơn hàng</h3>
-            <form class="row contact_form" action="#" method="post" novalidate="novalidate">
-              <div class="col-md-6 form-group p_star">
-                <input type="text" class="form-control" id="first" name="name" />
-                <span class="placeholder" data-placeholder="Tên"></span>
+              <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" id="first" name="fullname" placeholder="Tên" />
+
               </div>
-              <div class="col-md-6 form-group p_star">
-                <input type="text" class="form-control" id="last" name="name" />
-                <span class="placeholder" data-placeholder="Họ"></span>
-              </div>
-              <div class="col-md-6 form-group p_star">
-                <input type="text" class="form-control" id="number" name="number" />
-                <span class="placeholder" data-placeholder="Số điện thoại"></span>
-              </div>
-              <div class="col-md-6 form-group p_star">
-                <input type="text" class="form-control" id="email" name="compemailany" />
-                <span class="placeholder" data-placeholder="Địa chỉ Email"></span>
+              {{-- <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" id="last" name="fullname" />
+                <span class="placeholder" placeholder="Họ"></span>
+              </div> --}}
+              <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" id="number" name="phone" placeholder="Số điện thoại"/>
+
               </div>
               <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" id="email" name="email" placeholder="Địa chỉ Email"/>
+
+              </div>
+              {{-- <div class="col-md-12 form-group p_star">
                 <select class="country_select">
                   <option value="1">Country</option>
                   <option value="2">Country</option>
                   <option value="4">Country</option>
                 </select>
-              </div>
+              </div> --}}
               <div class="col-md-12 form-group p_star">
-                <input type="text" class="form-control" id="add1" name="add1" />
-                <span class="placeholder" data-placeholder="Address line 01"></span>
+                <input type="text" class="form-control" id="add1" name="address" placeholder="Địa chỉ của bạn"/>
+
               </div>
-              <div class="col-md-12 form-group p_star">
+              {{-- <div class="col-md-12 form-group p_star">
                 <input type="text" class="form-control" id="add2" name="add2" />
                 <span class="placeholder" data-placeholder="Address line 02"></span>
-              </div>
-              <div class="col-md-12 form-group p_star">
+              </div> --}}
+              {{-- <div class="col-md-12 form-group p_star">
                 <input type="text" class="form-control" id="city" name="city" />
                 <span class="placeholder" data-placeholder="Town/City"></span>
-              </div>
-              <div class="col-md-12 form-group p_star">
+              </div> --}}
+              {{-- <div class="col-md-12 form-group p_star">
                 <select class="country_select">
                   <option value="1">District</option>
                   <option value="2">District</option>
                   <option value="4">District</option>
                 </select>
-              </div>
-              <div class="col-md-12 form-group">
+              </div> --}}
+              {{-- <div class="col-md-12 form-group">
                 <input type="text" class="form-control" id="zip" name="zip" placeholder="Postcode/ZIP" />
-              </div>
-              <div class="col-md-12 form-group">
+              </div> --}}
+              {{-- <div class="col-md-12 form-group">
                 <div class="creat_account">
                   <input type="checkbox" id="f-option2" name="selector" />
                   <label for="f-option2">Create an account?</label>
                 </div>
-              </div>
+              </div> --}}
               <div class="col-md-12 form-group">
-                <div class="creat_account">
+                {{-- <div class="creat_account">
                   <h3>Shipping Details</h3>
                   <input type="checkbox" id="f-option3" name="selector" />
                   <label for="f-option3">Ship to a different address?</label>
-                </div>
+                </div> --}}
                 <textarea class="form-control" name="message" id="message" rows="1"
                   placeholder="Order Notes"></textarea>
               </div>
-            </form>
+
+
           </div>
           <div class="col-lg-6">
             <div class="order_box">
@@ -151,10 +153,12 @@
                 <label for="f-option4">I’ve read and accept the </label>
                 <a href="#">terms & conditions*</a>
               </div>
-              <a class="btn_3" href="{{route('confirm')}}">Xác nhận đặt hàng</a>
+              <input type="text" hidden value="{{$total}}" name="total_price">
+              <button class="btn_3">Xác nhận đặt hàng</button>
             </div>
           </div>
         </div>
+         </form>
       </div>
     </div>
   </section>

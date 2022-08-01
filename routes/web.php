@@ -7,13 +7,16 @@ use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\confirmController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductDetail;
 use App\Http\Controllers\ProductListController;
 use App\Http\Controllers\ratingController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\TrackingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -57,10 +60,10 @@ Route::prefix('/')->group(function(){
     Route::post('test',[ProductListController::class,'sortByPrice'])->name('sortByPrice');
     Route::get('/checkout',function(){
         return view('checkout');
-    })->name('checkout');
-    Route::get('/comfirm', function(){
-        return view('confirm');
-    })->name('confirm');
+    })->name('checkout')->middleware(['auth']);
+    Route::post('/checkout',[CheckoutController::class,'index'])->name('addTransaction')->middleware(['auth']);
+    Route::get('/tracking',[TrackingController::class,'index'])->name('tracking')->middleware(['auth']);
+
 });
 Auth::routes();
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
