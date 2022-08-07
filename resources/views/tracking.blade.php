@@ -11,11 +11,15 @@
             <div class="col-lg-6">
               {{-- <input type="text" name="search"> --}}
             </div>
-        <div class="col-lg-12" style="background-color: azure;">
             @foreach ($transaction as $item)
+        <div class="col-lg-12" style="background-color: azure; margin-top:30px">
+            <div class="single_confirmation_details" style="padding: 20px;">
 
-            <div class="single_confirmation_details" style="padding: 20px; border-bottom:1px solid black;">
-              <h3>Mã đơn hàng: {{$item->trans_code}}</h3>
+              <h3>Mã đơn hàng: {{$item->trans_code}} </h3>
+              <h4>Trạng thái đơn hàng:
+            @if ($item->status == 1)
+                  <span class="text-success">Đang xử lí</span></h4>
+              @endif
               <table class="table table-borderless">
                 <thead>
                   <tr>
@@ -41,7 +45,7 @@
               <table class="table table-borderless">
                 <thead>
                   <tr>
-                    <th scope="col" colspan="2">Tên sản phẩm</th>
+                    <th scope="col" >Tên sản phẩm</th>
                     <th scope="col" colspan="2">Ảnh</th>
                     <th scope="col">Số lượng</th>
                     <th scope="col">Đơn giá</th>
@@ -52,19 +56,19 @@
 
                     @foreach ($item->orders as $order)
                         <tr>
-                          <th colspan="2"><span>{{$order->products->name}}</span></th>
+                          <th ><span>{{$order->products->name}}</span></th>
                           <th colspan="2"> <img src="{{url('images/products/'.$order->products->image)}}" width="100px" height="100px" alt=""></th>
                           <th>{{$order->quantity}}</th>
-                          <th> <span>{{$order->products->price * $order->quantity}}</span></th>
+                          <th> <span>{{number_format($order->products->price * $order->quantity)}}VNĐ</span></th>
                         </tr>
                     @endforeach
                     @endif
                 </tbody>
               </table>
-            @endforeach
-          </div>
+            </div>
 
         </div>
+        @endforeach
 
       </div>
 

@@ -66,7 +66,7 @@
                 </tr>
               </thead>
               <tbody>
-                @if (session('cart'))
+                {{-- @if (session('cart'))
 
                 @foreach (session('cart') as $id => $item)
 
@@ -77,7 +77,14 @@
                 </tr>
                 @endforeach
                 {{session()->forget('cart')}}
-                @endif
+                @endif --}}
+                @foreach ($input->orders as $order)
+                <tr>
+                    <th colspan="2"><span>{{$order->products->name}}</span></th>
+                    <th>{{$order->quantity}}</th>
+                    <th> <span>{{number_format($order->products->price)}}VNĐ</span></th>
+                  </tr>
+                @endforeach
                 {{-- <tr>
                   <th colspan="2"><span>Pixelstore fresh Blackberry</span></th>
                   <th>x02</th>

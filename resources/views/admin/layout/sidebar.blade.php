@@ -14,16 +14,16 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{route('user.list')}}">
           <i class="mdi mdi-view-headline menu-icon"></i>
-          <span class="menu-title">Sinh ziên nè</span>
+          <span class="menu-title">User</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="users">
+        <a class="nav-link" href="{{route('transaction.list')}}">
 
           <i class="mdi mdi-chart-pie menu-icon"></i>
-          <span class="menu-title">User</span>
+          <span class="menu-title">Đơn hàng</span>
         </a>
       </li>
       <li class="nav-item">

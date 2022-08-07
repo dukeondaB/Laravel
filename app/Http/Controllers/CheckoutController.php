@@ -23,6 +23,7 @@ class CheckoutController extends Controller
                 $order->quantity = $item['quantity'];
                 $order->transaction_id = $input->id;
                 $order->save();
+                \session()->forget('cart');
             }
 
         }

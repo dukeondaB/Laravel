@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
@@ -20,6 +21,7 @@ use App\Http\Controllers\TrackingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,9 +68,15 @@ Route::prefix('/')->group(function(){
 
 });
 Auth::routes();
+Route::get('auth/login-google', function(){
+    return Socialite::driver('google')->redirect();
+});
+Route::get('auth/google/callback', function(){
+    dd(Socialite::driver('google')->user());
+});
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/users', [UsersController::class, 'index']);
+    Route::get('/users', [UsersController::class, 'index'])->name('user.list');
     Route::get('/users/create', [UsersController::class, 'user_create'])->name('user.create');
     Route::post('/users/store', [UsersController::class, 'store']);
     Route::resource('products',ProductController::class);
@@ -76,6 +84,8 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('contact',[ContactController::class,'show'])->name('admin.contact');
     Route::get('category',[CategoryController::class,'index'])->name('category');
     Route::get('size',[SizeController::class,'index'])->name('size');
+    Route::get('transaction',[TransactionController::class,'index'])->name('transaction.list');
+    Route::get('transaction/{transaction}',[TransactionController::class,'show'])->name('transaction.show');
     // Route::get('/search','ProductController@search');
 });
 Route::get('products/search',[ProductController::class,'search'])->name('product-search');

@@ -85,8 +85,9 @@
             @if (Auth::check())
 
             <a class="btn_1 checkout_btn_1" href="{{route('checkout')}}">Xác nhận đơn hàng</a>
-            @endif
+            @else
             <a class="btn_1 checkout_btn_1" href="{{route('login')}}">Bạn cần đăng nhập để đặt hàng</a>
+            @endif
           </div>
         </div>
       </div>
