@@ -40,13 +40,15 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'description' => 'required',
             'image' => 'required',
+            'image_list' => 'required',
         ],[
             'name.required' => 'Tên sản phẩm không được để trống',
             'name.min' => 'Tên sản phẩm không được nhỏ hơn 6 kí tự',
             'price.required' => 'Giá sản phẩm không được để trống',
             'price.numeric' => 'Giá sản phẩm không thể nhập chữ',
             'description.required' => 'Chi tiết sản phẩm không được để trống',
-            'image.required' => 'Phải có ảnh đại diện sản phẩm'
+            'image.required' => 'Phải có ảnh đại diện sản phẩm',
+            'image_list.required' => 'Ảnh sản phẩm không thể để trống'
         ]);
         $product = new Product;
         $product->fill($request->all());

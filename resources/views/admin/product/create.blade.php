@@ -74,6 +74,9 @@
           <div class="form-group">
             <label for="image">Ảnh chi tiết sản phẩm:</label>
             <input type="file" name="image_list[]" multiple id="image" class="form-control">
+            @error('image_list')
+            <span class="text-danger">{{$message}}</span>
+        @enderror
           </div>
         <button type="submit" class="btn btn-success">Thêm Sản phẩm</button>
     </form>
