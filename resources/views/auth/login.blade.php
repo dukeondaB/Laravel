@@ -38,6 +38,9 @@
             <div class="form-group">
                 <button type="submit" class="form-control btn btn-primary submit px-3">Đăng nhập</button>
             </div>
+            <div class="form-group">
+                <a href="{{route('loginGoogle')}}" class="form-control btn btn-primary px-3">Đăng nhập bằng google</a>
+            </div>
             <div class="form-group d-md-flex">
                 <div class="w-50">
                     {{-- <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>

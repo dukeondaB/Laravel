@@ -14867,8 +14867,8 @@ fieldset:disabled .btn {
   "autoRename": true,
   "stringMap":[ {
     "name"    : "prev-next",
-    "search"  : "prev",
-    "replace" : "next"
+    "search"  : "Trước đó",
+    "replace" : "Kế tiếp"
   } ]
 } */
 .carousel-control-prev-icon {

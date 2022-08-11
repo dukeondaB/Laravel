@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CommentController;
@@ -68,13 +69,13 @@ Route::prefix('/')->group(function(){
     Route::get('/cancel/{id}',[TrackingController::class,'cancel'])->name('cancel');
 
 });
+
 Auth::routes();
-Route::get('auth/login-google', function(){
-    return Socialite::driver('google')->redirect();
-});
-Route::get('auth/google/callback', function(){
-    dd(Socialite::driver('google')->user());
-});
+Route::get('auth/login-google',[LoginController::class,'getLoginGoogle'])->name('loginGoogle');
+Route::get('auth/google/callback',[LoginController::class,'LoginGoogleCallback'])->name('callbackLogin');
+Route::post('auth/create',[LoginController::class,'saveGoogle'])->name('SaveGoogle');
+
+
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/users', [UsersController::class, 'index'])->name('user.list');

@@ -56,6 +56,11 @@ class ProductController extends Controller
         // $product->description = $request->description;
         // $product->size_id = $request->size_id;
         // $product->cate_id = $request->cate_id;
+        // if($request->hasFile('description')){
+        //     $txtFile = $request->file('description');
+        //     $txtFileName = \date('YmdHi').$txtFile->getClientOriginalName();
+        //     $txtFile->storeAs('images/textEditor',$txtFileName);
+        // }
         $product->status = $request->status == true ? '1': '0';
         // $product->image = $request->image;
         if($request->hasFile('image')){
@@ -75,7 +80,7 @@ class ProductController extends Controller
             };
             $product->image_list = implode('|',$array_list);
         }
-        \dd($product);
+        // \dd($product);
         $product->save();
         return \redirect()->route('products.index');
     }
