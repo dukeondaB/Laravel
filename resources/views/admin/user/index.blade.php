@@ -10,6 +10,7 @@
             <td>Name</td>
             <td>Email</td>
             <td>Role</td>
+            <td>Action</td>
         </tr>
         @foreach($users as $user)
             <tr>
@@ -17,6 +18,11 @@
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{$user->role_as==1?'Admin':'User'}}</td>
+                <td>
+                    @if ($user->role_as == 0)
+                        <a href="{{route('changeRole',$user->id)}}"class="btn btn-success">Cấp quyền admin</a>
+                    @endif
+                </td>
             </tr>
         @endforeach
     </table>

@@ -1,5 +1,5 @@
 @extends('admin.layout.master')
-@section('title') <h3>Đơn hàng : {{$transaction->trans_code}}</h3> @endsection
+@section('title')Đơn hàng : {{$transaction->trans_code}}@endsection
 @section('content')
 <table class="table table-borderless">
     <thead>
@@ -47,4 +47,12 @@
     </tbody>
   </table>
   <h3>Trạng thái đơn hàng</h3>
+  <div class="form-group">
+    <select name="" id="" class="form-select" multiple aria-label="multiple select example">
+        <option value="1" class="text-warning">Đang xử lí</option>
+        <option value="2" class="text-primary">Đang giao hàng</option>
+        <option value="3" class="text-success">Đã giao hàng thành công</option>
+        <option value="0" class="text-danger">Hủy đơn hàng</option>
+    </select>
+  </div>
 @endsection

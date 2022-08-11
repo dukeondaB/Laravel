@@ -31,10 +31,19 @@ class UsersController extends Controller
         $userInfo->password = Hash::make($request->password);
 
         $userInfo->save();
+        return \redirect()->route('user.list');
     }
     public function index()
     {
         $users = User::all();
         return \view('admin.user.index', \compact('users'));
+    }
+    public function changeRole($id)
+    {
+        $user = User::select('role_as')->where('id', $id)->first();
+        if($user->role == 0)
+        $role = 1;
+        $user->where('id', $id)->update(['role_as'=>$role]);
+        return \redirect()->back();
     }
 }

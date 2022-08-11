@@ -65,6 +65,7 @@ Route::prefix('/')->group(function(){
     })->name('checkout')->middleware(['auth']);
     Route::post('/checkout',[CheckoutController::class,'index'])->name('addTransaction')->middleware(['auth']);
     Route::get('/tracking',[TrackingController::class,'index'])->name('tracking')->middleware(['auth']);
+    Route::get('/cancel/{id}',[TrackingController::class,'cancel'])->name('cancel');
 
 });
 Auth::routes();
@@ -78,7 +79,8 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/users', [UsersController::class, 'index'])->name('user.list');
     Route::get('/users/create', [UsersController::class, 'user_create'])->name('user.create');
-    Route::post('/users/store', [UsersController::class, 'store']);
+    Route::post('/users/store', [UsersController::class, 'store'])->name('user.store');
+    Route::get('changeRole/{id}',[UsersController::class,'changeRole'])->name('changeRole');
     Route::resource('products',ProductController::class);
     Route::get('product/changeStatus',[ProductController::class,'changeStatus'])->name('product_changeStatus');
     Route::get('contact',[ContactController::class,'show'])->name('admin.contact');

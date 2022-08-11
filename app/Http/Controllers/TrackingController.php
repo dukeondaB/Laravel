@@ -25,4 +25,12 @@ class TrackingController extends Controller
         // \dd($user_id,$transaction);
         return \view('tracking',\compact('transaction'));
     }
+    public function cancel($id)
+    {
+        $transaction = Transaction::select('status')->where('id',$id)->first();
+        if($transaction->status != 0)
+        $status = 0;
+        $transaction->where('id',$id)->update(['status' => $status]);
+        return \redirect()->back();
+    }
 }

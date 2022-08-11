@@ -18,8 +18,17 @@
               <h3>Mã đơn hàng: {{$item->trans_code}} </h3>
               <h4>Trạng thái đơn hàng:
             @if ($item->status == 1)
-                  <span class="text-success">Đang xử lí</span></h4>
+                  <span class="text-warning">Đang xử lí</span></h4>
               @endif
+              @if ($item->status == 2)
+              <span class="text-primary">Đang giao hàng</span></h4>
+          @endif
+          @if ($item->status == 3)
+          <span class="text-success">Giao hàng thành công</span></h4>
+      @endif
+      @if ($item->status == 0)
+      <span class="text-danger">Đã hủy</span></h4>
+  @endif
               <table class="table table-borderless">
                 <thead>
                   <tr>
@@ -65,8 +74,10 @@
                     @endif
                 </tbody>
               </table>
+              @if ($item->status != 0 && $item->status != 3)
+                  <a href="{{route('cancel',$item->id)}}" class="btn btn-warning text-danger">Hủy đơn hàng</a>
+              @endif
             </div>
-
         </div>
         @endforeach
 

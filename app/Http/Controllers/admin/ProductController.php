@@ -35,16 +35,27 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        // $data = $request->all();
-        // $validateData = $request->validate();
+        $request->validate([
+            'name' => 'required|min:6',
+            'price' => 'required|numeric',
+            'description' => 'required',
+            'image' => 'required',
+        ],[
+            'name.required' => 'Tên sản phẩm không được để trống',
+            'name.min' => 'Tên sản phẩm không được nhỏ hơn 6 kí tự',
+            'price.required' => 'Giá sản phẩm không được để trống',
+            'price.numeric' => 'Giá sản phẩm không thể nhập chữ',
+            'description.required' => 'Chi tiết sản phẩm không được để trống',
+            'image.required' => 'Phải có ảnh đại diện sản phẩm'
+        ]);
         $product = new Product;
         $product->fill($request->all());
         // \dd($request->image_list);
-        $product->name = $request->name;
-        $product->price = $request->price;
-        $product->description = $request->description;
-        $product->size_id = $request->size_id;
-        $product->cate_id = $request->cate_id;
+        // $product->name = $request->name;
+        // $product->price = $request->price;
+        // $product->description = $request->description;
+        // $product->size_id = $request->size_id;
+        // $product->cate_id = $request->cate_id;
         $product->status = $request->status == true ? '1': '0';
         // $product->image = $request->image;
         if($request->hasFile('image')){
@@ -64,6 +75,7 @@ class ProductController extends Controller
             };
             $product->image_list = implode('|',$array_list);
         }
+        \dd($product);
         $product->save();
         return \redirect()->route('products.index');
     }
@@ -153,4 +165,5 @@ class ProductController extends Controller
         $product->save();
         return response()->json(['success'=>'Status change successfully.']);
     }
+
 }

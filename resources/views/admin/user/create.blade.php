@@ -3,7 +3,7 @@
 @section('title') Thêm tài khoản @endsection
 @section('content')
 
-    <form action="/users/store" method="post" class="form-group">
+    <form action="{{route('user.store')}}" method="post" class="form-group">
         @csrf
         <label for="Name">
             Name:
