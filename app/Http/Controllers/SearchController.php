@@ -10,7 +10,7 @@ class SearchController extends Controller
     public function searchClient(Request $request)
     {
         if ($request->ajax()) {
-            $data = Product::where('name','LIKE',$request->name.'%')->get();
+            $data = Product::where('name','LIKE','%'.$request->name.'%')->get();
             $output = '';
             if (count($data)>0) {
                 $output = '<ul class="list-group" style="" id="clientSearch">';
@@ -19,7 +19,7 @@ class SearchController extends Controller
                 }
                 $output .= '</ul>';
             }else {
-                $output .= '<li class="list-group-item">'.'No Data Found'.'</li>';
+                $output .= '<li class="list-group-item">'.'Không tìm thấy sản phẩm'.'</li>';
             }
             return $output;
         }

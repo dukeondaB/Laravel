@@ -8,6 +8,8 @@
                 <div class="left_sidebar_area">
                     <aside class="left_widgets p_filter_widgets">
                         <div class="l_w_title">
+                            <form action="{{route('sortByPrice')}}" method="POST">
+                                @csrf
                             <h3>Danh mục sản phẩm</h3>
                         </div>
                         <div class="widgets_inner">
@@ -15,25 +17,10 @@
                                @foreach ($category as $item)
                                <li>
                                 <a href="{{route('sortByCate',$item->id)}}">{{$item->name}}</a>
+                                {{-- <input type="checkbox" name="cate" id="" value="{{$item->id}}"> {{$item->name}} --}}
                                 {{-- <span>()</span> --}}
                             </li>
                                @endforeach
-                                {{-- <li>
-                                    <a href="{{route('sortByCate', 2)}}">Bàn ăn</a>
-                                    <span>(250)</span>
-                                </li>
-                                <li>
-                                    <a href="{{route('sortByCate', 3)}}">Tủ quần áo</a>
-                                    <span>(250)</span>
-                                </li>
-                                <li>
-                                    <a href="{{route('sortByCate', 4)}}">Tủ giày</a>
-                                    <span>(250)</span>
-                                </li>
-                                <li>
-                                    <a href="{{route('sortByCate', 5)}}">Thảm</a>
-                                    <span>(250)</span>
-                                </li> --}}
                             </ul>
                         </div>
 
@@ -47,6 +34,7 @@
                                 @foreach ($size as $size)
                                 <li>
                                  <a href="{{route('sortBySize',$size->id)}}">{{$size->size_name}}</a>
+                                 {{-- <input type="checkbox" name="size" id="" value="{{$size->id}}"> {{$size->size_name}} --}}
 
                              </li>
                                 @endforeach
@@ -60,8 +48,8 @@
                         <div class="l_w_title">
                             <h3>Lọc theo giá</h3>
                         </div>
-                        <form action="{{route('sortByPrice')}}" method="POST">
-                            @csrf
+                        {{-- <form action="{{route('sortByPrice')}}" method="POST"> --}}
+                            {{-- @csrf --}}
                         <div class="widgets_inner">
                             <div class="range_item">
                                 <div id="slider-range"></div>
@@ -77,7 +65,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-danger">Lọc</button>
+                            <button class="btn btn-danger">Lọc giá</button>
                         </div>
                     </form>
                     </aside>

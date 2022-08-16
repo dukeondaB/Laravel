@@ -74,7 +74,7 @@
                     @endif
                 </tbody>
               </table>
-              @if ($item->status != 0 && $item->status != 3)
+              @if ($item->status == 1)
                   <a href="{{route('cancel',$item->id)}}" class="btn btn-warning text-danger">Hủy đơn hàng</a>
               @endif
             </div>

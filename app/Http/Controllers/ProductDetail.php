@@ -11,8 +11,7 @@ class ProductDetail extends Controller
     {
         $related_products = Product::select('id','name','price','image','cate_id')->where('cate_id','=',$product->cate_id)->where('id','!=',$product->id)->get();
         // \dd($related_products);
-        // view + 1
-        $product->increment('view',1);
+            $product->increment('view',1);
         // \dd($product);
 
         return \view('product-detail',[

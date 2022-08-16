@@ -22,7 +22,6 @@ class ContactController extends Controller
 
         $contact = new Contact;
         $contact->fill($request->all());
-        // \dd($contact);
         $contact->save();
         return back()->with('success', 'cảm ơn bạn đã để lại nời nhắn');
     }
@@ -38,13 +37,7 @@ class ContactController extends Controller
     }
     public function show(){
         $contact = Contact::select('id','email','name','message')->where('name','!=',null)->paginate(10);
-        // $contact = Contact::where('name','LIKE','null')->get();
-        // \dd($contact);
         $subscribe = Contact::select('id','email','name')->where('name','=',\null)->get();
-
         return \view('admin.contact.index', ['contact' => $contact, 'subscribe' => $subscribe]);
-
-
-
     }
 }

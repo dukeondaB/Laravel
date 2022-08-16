@@ -75,13 +75,19 @@ class ProductListController extends Controller
     public function sortByPrice(Request $req)
     {
         // \dd($req->all());
+        $size_id = $req->size;
+        $cate_id = $req->cate;
         $min_price = $req->min;
         $max_price = $req->max;
         $category = Category::all();
         $size = Size::all();
         $product_new = Product::select('id','name','image','price','status')->where('status',1)->orderBy('id','DESC')->limit(10)->get();
         $pageTitle = 'Giá: từ: '.number_format($req->min).'-'.number_format($req->max);
-        $product = Product::where('status',1)->whereBetween('price',[(int)$req->min, (int)$req->max])->paginate(9);
+        $product = Product::where('status',1)
+                    // ->where('size_id',$size_id)
+                    // ->where('cate_id',$cate_id)
+                    ->whereBetween('price',[(int)$min_price, (int)$max_price])->paginate(9);
+                    // \dd($size_id);
         return \view('product-list',[
             'product' => $product,
             'product_new'=> $product_new,

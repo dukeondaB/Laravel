@@ -47,12 +47,16 @@
     </tbody>
   </table>
   <h3>Trạng thái đơn hàng</h3>
+  <form action="{{route('change_trans')}}" method="post">
+    @csrf
+    <input type="hidden" name="id" value="{{$transaction->id}}">
   <div class="form-group">
-    <select name="" id="" class="form-select" multiple aria-label="multiple select example">
-        <option value="1" class="text-warning">Đang xử lí</option>
-        <option value="2" class="text-primary">Đang giao hàng</option>
-        <option value="3" class="text-success">Đã giao hàng thành công</option>
-        <option value="0" class="text-danger">Hủy đơn hàng</option>
+    <select name="status" id="" class="form-select" multiple aria-label="multiple select example">
+        <option value="1" {{$transaction->status === 1 ? 'selected':''}} class="text-warning">Đang xử lí</option>
+        <option value="2" {{$transaction->status === 2 ? 'selected':''}} class="text-primary">Đang giao hàng</option>
+        <option value="3"{{$transaction->status === 3 ? 'selected':''}} class="text-success">Đã giao hàng thành công</option>
+        <option value="0"{{$transaction->status === 0 ? 'selected':''}} class="text-danger">Hủy đơn hàng</option>
     </select>
-  </div>
+    <button class="btn btn-success">Lưu</button>
+  </div></form>
 @endsection

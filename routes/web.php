@@ -19,6 +19,7 @@ use App\Http\Controllers\ProductListController;
 use App\Http\Controllers\ratingController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TrackingController;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -89,6 +90,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('size',[SizeController::class,'index'])->name('size');
     Route::get('transaction',[TransactionController::class,'index'])->name('transaction.list');
     Route::get('transaction/{transaction}',[TransactionController::class,'show'])->name('transaction.show');
+    Route::post('transaction/changeStatus',[TransactionController::class,'changeStatus'])->name('change_trans');
     // Route::get('/search','ProductController@search');
 });
 Route::get('products/search',[ProductController::class,'search'])->name('product-search');

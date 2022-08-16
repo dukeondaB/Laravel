@@ -60,6 +60,13 @@ class LoginController extends Controller
     }
     public function saveGoogle(Request $request)
     {
+        $request->validate([
+            'password' => 'required|confirmed',
+        ],[
+            'password.required' => 'Mật khẩu không thể để trống',
+            'password.confirmed' => 'Nhập lại mật khẩu nhập không đúng'
+
+        ]);
         if ($request->password_confirmation == $request->password) {
             $newUser = new User;
             // $newUser->fill($request->all());
